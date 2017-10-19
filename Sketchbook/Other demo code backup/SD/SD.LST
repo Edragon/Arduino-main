@@ -1,0 +1,535 @@
+C51 COMPILER V8.16   SD                                                                    10/03/2010 14:34:31 PAGE 1   
+
+
+C51 COMPILER V8.16, COMPILATION OF MODULE SD
+OBJECT MODULE PLACED IN SD.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE SD.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /*
+   2           * SD模块测试程序
+   3           * 
+   4           * 用途：SD模块测试程序
+   5           * 
+   6           * 作者                                 日期                            备注
+   7           * Huafeng Lin                  20010/10/03                     新增
+   8           * Huafeng Lin                  20010/10/03                     修改
+   9           * 
+  10           */
+  11          
+  12          #include "REG52.H"
+  13          ////////////////////////****************/
+  14          unsigned char *SDInfo1="SD Init Success.";
+  15          unsigned char *SDInfo2="SD Init Fail.";
+  16          unsigned int xdata ReadBuffer[128]  ;
+  17          unsigned int xdata WriteBuffer[128] ;
+  18          unsigned int BlockSize;
+  19          unsigned long int BlockNR;
+  20          
+  21          //sbit sd_clk=P3^2;
+  22          //sbit sd_cse=P3^0;
+  23          //sbit sd_dai=P3^3; //Do
+  24          //sbit sd_dao=P3^1;  //DI
+  25          
+  26           sbit sd_cse=P1^0;
+  27           sbit sd_dao=P1^1;//DI
+  28           sbit sd_clk=P1^2;
+  29           sbit sd_dai=P1^3;//Do
+  30          
+  31          void Delay5us()
+  32          {
+  33   1              unsigned char a=0;
+  34   1              for(a=0;a<40;a++)
+  35   1              ;
+  36   1      }
+  37          //********************************************
+  38          void SD_2Byte_Write(unsigned int IOData)
+  39          {
+  40   1              unsigned char BitCounter;
+  41   1                      
+  42   1              for (BitCounter=0;BitCounter<16;BitCounter++)
+  43   1              {
+  44   2                      sd_clk=0;//CLK Low
+  45   2                      
+  46   2                      if(IOData&0x8000)//If the MSB of IOData is 1, then Do=1, else Do=0.
+  47   2                              sd_dao=1;//Do High
+  48   2                      else
+  49   2                              sd_dao=0;//Do Low
+  50   2                                      
+  51   2                      sd_clk=1;//CLK High
+  52   2                      Delay5us();
+  53   2                      
+  54   2                      IOData=IOData<<1;//Because the MSB is transmitted firstly, shift to next lower bit.
+  55   2              }
+C51 COMPILER V8.16   SD                                                                    10/03/2010 14:34:31 PAGE 2   
+
+  56   1      }
+  57          //********************************************
+  58          void SD_Write(unsigned int IOData)
+  59          {
+  60   1              unsigned char BitCounter;
+  61   1              IOData=IOData<<8;
+  62   1              
+  63   1              for (BitCounter=0;BitCounter<8;BitCounter++)
+  64   1              {
+  65   2                      sd_clk=0;//CLK Low
+  66   2                      
+  67   2                      if(IOData&0x8000)//If the MSB of IOData is 1, then Do=1, else Do=0.
+  68   2                              sd_dao=1;//Do High
+  69   2                      else
+  70   2                              sd_dao=0;//Do Low
+  71   2                                      
+  72   2                      sd_clk=1;//CLK High
+  73   2                      Delay5us();
+  74   2                      
+  75   2                      IOData=IOData<<1;//Because the MSB is transmitted firstly, shift to next lower bit.
+  76   2              }
+  77   1      }
+  78          //********************************************
+  79          unsigned int SD_2Byte_Read()
+  80          {
+  81   1              unsigned int Buffer;
+  82   1              unsigned char BitCounter;
+  83   1              Buffer=0;
+  84   1              
+  85   1              for (BitCounter=0;BitCounter<16;BitCounter++)
+  86   1              {
+  87   2                      sd_clk=0;//CLK Low
+  88   2                      Delay5us();
+  89   2                      sd_clk=1;//CLK High
+  90   2                      Buffer=Buffer<<1;//Because the MSB is transmitted firstly, shift to next lower bit.
+  91   2                                       //Because the LSB will be damaged, we can not put this line under next line.
+  92   2                      if(sd_dai) 
+  93   2                              Buffer++;//If SPI_Din=1 then the LSB_of_Buffer=1.               
+  94   2              }
+  95   1              
+  96   1              return Buffer;
+  97   1      }
+  98          //********************************************
+  99          unsigned int SD_Read()
+ 100          {
+ 101   1              unsigned int Buffer;
+ 102   1              unsigned char BitCounter;
+ 103   1              Buffer=0xffff;
+ 104   1              
+ 105   1              for (BitCounter=0;BitCounter<8;BitCounter++)
+ 106   1              {
+ 107   2                      sd_clk=0;//CLK Low
+ 108   2                      Delay5us();
+ 109   2                      sd_clk=1;//CLK High
+ 110   2                      Buffer=Buffer<<1;//Because the MSB is transmitted firstly, shift to next lower bit.
+ 111   2                                       //Because the LSB will be damaged, we can not put this line under next line.
+ 112   2                      if(sd_dai) 
+ 113   2                              Buffer++;//If SPI_Din=1 then the LSB_of_Buffer=1.               
+ 114   2              }
+ 115   1              
+ 116   1              return Buffer;
+ 117   1      }
+C51 COMPILER V8.16   SD                                                                    10/03/2010 14:34:31 PAGE 3   
+
+ 118          //********************************************
+ 119          unsigned int SD_CMD_Write(unsigned int CMDIndex,unsigned long CMDArg,unsigned int ResType,unsigned int CSL
+             -owRSV)//ResType:Response Type, send 1 for R1; send 2 for R1b; send 3 for R2.
+ 120          {       //There are 7 steps need to do.(marked by [1]-[7])
+ 121   1              unsigned int temp,Response,Response2,CRC,MaximumTimes;
+ 122   1              Response2=0;
+ 123   1              MaximumTimes=10;
+ 124   1              CRC=0x0095;//0x0095 is only valid for CMD0
+ 125   1              if (CMDIndex!=0) CRC=0x00ff;
+ 126   1              
+ 127   1              sd_cse=0;//[1] CS Low
+ 128   1              
+ 129   1              SD_2Byte_Write(((CMDIndex|0x0040)<<8)+(CMDArg>>24));//[2] Transmit Command_Index & 1st Byte of Command_Ar
+             -gument.
+ 130   1              SD_2Byte_Write((CMDArg&0x00ffff00)>>8);                         //[2] 2nd & 3rd Byte of Command_Argument
+ 131   1              SD_2Byte_Write(((CMDArg&0x000000ff)<<8)+CRC);           //[2] 4th Byte of Command_Argument & CRC only for CMD0
+ 132   1              
+ 133   1              sd_dao=1;//[3] Do High
+ 134   1                                                      //[3] Restore Do to High Level
+ 135   1              
+ 136   1               for (temp=0;temp<8;temp++)//[4] Provide 8 extra clock after CMD
+ 137   1              {
+ 138   2                      sd_clk=0;//CLK Low
+ 139   2                      Delay5us();
+ 140   2                      sd_clk=1;//CLK High
+ 141   2                      Delay5us();
+ 142   2              }
+ 143   1              
+ 144   1              switch (ResType)//[5] wait response
+ 145   1              {
+ 146   2                      case 1://R1
+ 147   2                                      {
+ 148   3                                              do
+ 149   3                                                      Response=SD_Read();
+ 150   3                                              while (Response==0xffff);
+ 151   3                                              break;
+ 152   3                                      }
+ 153   2                      case 2://R1b
+ 154   2                                      {
+ 155   3                                              do
+ 156   3                                                      Response=SD_Read();
+ 157   3                                              while (Response==0xffff);//Read R1 firstly
+ 158   3                                              
+ 159   3                                              do
+ 160   3                                                      Response2=SD_Read()-0xff00;
+ 161   3                                              while (Response2!=0);//Wait until the Busy_Signal_Token is non-zero
+ 162   3                                              break;  
+ 163   3                                      }
+ 164   2                      case 3: Response=SD_2Byte_Read();break;//R2
+ 165   2              }
+ 166   1              
+ 167   1              if (CSLowRSV==0) sd_cse=1;//[6] CS High (if the CMD has data block response CS should be kept low)
+ 168   1               
+ 169   1               for (temp=0;temp<8;temp++)//[7] Provide 8 extra clock after card response
+ 170   1              {
+ 171   2                      sd_clk=0;//CLK Low
+ 172   2                      Delay5us();
+ 173   2                      sd_clk=1;//CLK High
+ 174   2                      Delay5us();
+ 175   2              }
+ 176   1              return Response;
+ 177   1      }
+C51 COMPILER V8.16   SD                                                                    10/03/2010 14:34:31 PAGE 4   
+
+ 178          //********************************************
+ 179          unsigned int SD_Reset_Card()
+ 180          {
+ 181   1              unsigned int temp,MaximumTimes;
+ 182   1              MaximumTimes=10;
+ 183   1              
+ 184   1              for (temp=0;temp<80;temp++)//Send 74+ Clocks
+ 185   1              {
+ 186   2                      sd_clk=0;//CLK Low
+ 187   2                      Delay5us();
+ 188   2                      sd_clk=1;//CLK High
+ 189   2                      Delay5us();
+ 190   2              }
+ 191   1                      
+ 192   1              return SD_CMD_Write(0x0000,0x00000000,1,0);//Send CMD0
+ 193   1      }
+ 194          //********************************************
+ 195          unsigned int SD_Initiate_Card()//Polling the card after reset
+ 196          {
+ 197   1              unsigned int temp,Response,MaximumTimes;
+ 198   1              MaximumTimes=50;
+ 199   1              
+ 200   1              for(temp=0;temp<MaximumTimes;temp++)
+ 201   1              {
+ 202   2                      Response=SD_CMD_Write(0x0037,0x00000000,1,0);//Send CMD55
+ 203   2                      Response=SD_CMD_Write(0x0029,0x00000000,1,0);//Send ACMD41
+ 204   2                      if (Response==0xff00)
+ 205   2                              temp=MaximumTimes;
+ 206   2              }
+ 207   1      
+ 208   1              return Response;
+ 209   1      }
+ 210          //********************************************
+ 211          unsigned int SD_Get_CardInfo()//Read CSD register
+ 212          {
+ 213   1              unsigned int temp,Response,MaximumTimes;
+ 214   1              MaximumTimes=50;
+ 215   1              
+ 216   1              for(temp=0;temp<MaximumTimes;temp++)
+ 217   1              {
+ 218   2                      Response=SD_CMD_Write(9,0x00000000,1,1);//Send CMD9
+ 219   2                      if (Response==0xff00)
+ 220   2                              temp=MaximumTimes;
+ 221   2              }
+ 222   1              
+ 223   1               for (temp=0;temp<8;temp++)//Provide 8 clock to romove the first byte of data response (0x00fe)
+ 224   1              {
+ 225   2                      sd_clk=0;//CLK Low
+ 226   2                      Delay5us();
+ 227   2                      sd_clk=1;//CLK High
+ 228   2                      Delay5us();
+ 229   2              }
+ 230   1              
+ 231   1              for (temp=0;temp<8;temp++) ReadBuffer[temp]=SD_2Byte_Read();//Get the CSD data
+ 232   1              
+ 233   1              for (temp=0;temp<16;temp++)//Provide 16 clock to remove the last 2 bytes of data response (CRC)
+ 234   1              {
+ 235   2                      sd_clk=0;//CLK Low
+ 236   2                      Delay5us();
+ 237   2                      sd_clk=1;//CLK High
+ 238   2                      Delay5us();
+ 239   2              }
+C51 COMPILER V8.16   SD                                                                    10/03/2010 14:34:31 PAGE 5   
+
+ 240   1              
+ 241   1              sd_cse=1;//CS_High()
+ 242   1              
+ 243   1              for (temp=0;temp<8;temp++)//Provide 8 extra clock after data response
+ 244   1              {
+ 245   2                      sd_clk=0;//CLK Low
+ 246   2                      Delay5us();
+ 247   2                      sd_clk=1;//CLK High
+ 248   2                      Delay5us();
+ 249   2              }
+ 250   1              
+ 251   1              BlockNR=((ReadBuffer[3]<<2)&0x0fff)+((ReadBuffer[4]>>14)&0x0003)+1;//Calcuate MULT
+ 252   1              BlockNR=BlockNR*(0x0002<<(((ReadBuffer[4]<<1)&0x0007)+((ReadBuffer[5]>>15)&0x0001)+1));//Calcuate Block_N
+             -umber
+ 253   1              return Response;
+ 254   1      }
+ 255          //********************************************
+ 256          unsigned int SD_Overall_Initiation()
+ 257          {
+ 258   1              unsigned int Response,Response_2;
+ 259   1              Response=0x0000;
+ 260   1              Response_2=0xff00;
+ 261   1              
+ 262   1              sd_dao=1;//[1] Do High
+ 263   1                                                      //[1] Do must be High when there is no transmition
+ 264   1              do
+ 265   1                      Response=SD_Reset_Card();//[2] Send CMD0
+ 266   1              while (Response!=0xff01);
+ 267   1              
+ 268   1              if (Response!=0xff01) Response_2+=8;
+ 269   1              
+ 270   1              //Response=SD_CMD_Write(8,0x00000000,1,0);//Send CMD8
+ 271   1              
+ 272   1              Response=SD_Initiate_Card();//[3] Send CMD55+ACMD41 
+ 273   1              if (Response==0xff00)
+ 274   1                      ;
+ 275   1              else
+ 276   1                      {
+ 277   2                      Response_2+=4;
+ 278   2                      ;
+ 279   2                      }
+ 280   1              
+ 281   1              do
+ 282   1                      Response=SD_Get_CardInfo();//[4] Read CSD
+ 283   1              while (Response!=0xff00);
+ 284   1              if (Response==0xff01) Response_2+=2;
+ 285   1              
+ 286   1              return Response_2;
+ 287   1      //      0000|0000||0000|0000 Response_2
+ 288   1      //                  |||_CSD Fail
+ 289   1      //                  ||__CMD55+ACMD41 Fail
+ 290   1      //                  |___CMD0 Fail
+ 291   1      }
+ 292          //********************************************
+ 293          unsigned int SD_Get_CardID()//Read CID register
+ 294          {
+ 295   1              unsigned int temp,Response,MaximumTimes;
+ 296   1              MaximumTimes=10;
+ 297   1              
+ 298   1              for(temp=0;temp<MaximumTimes;temp++)
+ 299   1              {
+ 300   2                      Response=SD_CMD_Write(10,0x00000000,1,1);//Send CMD9
+C51 COMPILER V8.16   SD                                                                    10/03/2010 14:34:31 PAGE 6   
+
+ 301   2                      if (Response==0xff00)
+ 302   2                              temp=MaximumTimes;
+ 303   2              }
+ 304   1              
+ 305   1               for (temp=0;temp<8;temp++)//Provide 8 clock to romove the first byte of data response (0x00fe)
+ 306   1              {
+ 307   2                      sd_clk=0;//CLK Low
+ 308   2                      Delay5us();
+ 309   2                      sd_clk=1;//CLK High
+ 310   2                      Delay5us();
+ 311   2              }
+ 312   1              
+ 313   1              for (temp=0;temp<8;temp++) ReadBuffer[temp]=SD_2Byte_Read();//Get the CID data
+ 314   1              
+ 315   1              for (temp=0;temp<16;temp++)//Provide 16 clock to remove the last 2 bytes of data response (CRC)
+ 316   1              {
+ 317   2                      sd_clk=0;//CLK Low
+ 318   2                      Delay5us();
+ 319   2                      sd_clk=1;//CLK High
+ 320   2                      Delay5us();
+ 321   2              }
+ 322   1              
+ 323   1              sd_cse=1;//CS_High()
+ 324   1              
+ 325   1              for (temp=0;temp<8;temp++)//Provide 8 extra clock after data response
+ 326   1              {
+ 327   2                      sd_clk=0;//CLK Low
+ 328   2                      Delay5us();
+ 329   2                      sd_clk=1;//CLK High
+ 330   2                      Delay5us();
+ 331   2              }
+ 332   1              
+ 333   1              return Response;
+ 334   1      }
+ 335          //********************************************
+ 336          unsigned int Read_Single_Block(unsigned long int BlockAddress)
+ 337          {
+ 338   1              unsigned int temp,Response,MaximumTimes;
+ 339   1              MaximumTimes=10;
+ 340   1              
+ 341   1              if (BlockAddress>BlockNR) return 0xff20;//whether BlockAddress out of range?
+ 342   1              
+ 343   1              for(temp=0;temp<MaximumTimes;temp++)
+ 344   1              {
+ 345   2                      Response=SD_CMD_Write(17,BlockAddress,1,1);//Send CMD17
+ 346   2                      if (Response==0xff00)
+ 347   2                              temp=MaximumTimes;
+ 348   2              }
+ 349   1              
+ 350   1              while (SD_Read()!=0xfffe) {;}
+ 351   1              //这里为了使只有512byte的单片机能够读写SD卡，特意节省了RAM的使用量，每次读写只有两个重复的128byte
+ 352   1              //如果您使用的单片机拥有1K以上的RAM请将"%128"去掉       
+ 353   1              for (temp=0;temp<256;temp++) ReadBuffer[temp%128]=SD_2Byte_Read();//Get the readed data
+ 354   1              
+ 355   1              for (temp=0;temp<16;temp++)//Provide 16 clock to remove the last 2 bytes of data response (CRC)
+ 356   1              {
+ 357   2                      sd_clk=0;//CLK Low
+ 358   2                      Delay5us();
+ 359   2                      sd_clk=1;//CLK High
+ 360   2                      Delay5us();
+ 361   2              }
+ 362   1              
+C51 COMPILER V8.16   SD                                                                    10/03/2010 14:34:31 PAGE 7   
+
+ 363   1              sd_cse=1;//CS_High()
+ 364   1              
+ 365   1              for (temp=0;temp<8;temp++)//Provide 8 extra clock after data response
+ 366   1              {
+ 367   2                      sd_clk=0;//CLK Low
+ 368   2                      Delay5us();
+ 369   2                      sd_clk=1;//CLK High
+ 370   2                      Delay5us();
+ 371   2              }
+ 372   1              
+ 373   1              return Response;
+ 374   1      }
+ 375          //********************************************
+ 376          unsigned int Write_Single_Block(unsigned long int BlockAddress)
+ 377          {
+ 378   1              unsigned int temp,Response,MaximumTimes;
+ 379   1              MaximumTimes=10;
+ 380   1              
+ 381   1              if (BlockAddress>BlockNR) return 0xff20;//whether BlockAddress out of range?
+ 382   1              
+ 383   1              for(temp=0;temp<MaximumTimes;temp++)
+ 384   1              {
+ 385   2                      Response=SD_CMD_Write(24,BlockAddress,1,1);//Send CMD24
+ 386   2                      if (Response==0xff00)
+ 387   2                              temp=MaximumTimes;
+ 388   2              }
+ 389   1              
+ 390   1              for (temp=0;temp<8;temp++)//Provide 8 extra clock after CMD response
+ 391   1              {
+ 392   2                      sd_clk=0;//CLK Low
+ 393   2                      Delay5us();
+ 394   2                      sd_clk=1;//CLK High
+ 395   2                      Delay5us();
+ 396   2              }
+ 397   1              
+ 398   1              SD_Write(0x00fe);//Send Start Block Token
+ 399   1              //这里为了使只有512byte的单片机能够读写SD卡，特意节省了RAM的使用量，每次读写只有两个重复的128byte
+ 400   1              //如果您使用的单片机拥有1K以上的RAM请将"%128"去掉
+ 401   1              for (temp=0;temp<256;temp++) SD_2Byte_Write(WriteBuffer[temp%128]);//Data Block
+ 402   1              SD_2Byte_Write(0xffff);//Send 2 Bytes CRC
+ 403   1              
+ 404   1              Response=SD_Read();
+ 405   1              while (SD_Read()!=0xffff) {;}
+ 406   1              
+ 407   1              sd_cse=1;//CS_High()
+ 408   1              
+ 409   1              for (temp=0;temp<8;temp++)//Provide 8 extra clock after data response
+ 410   1              {
+ 411   2                      sd_clk=0;//CLK Low
+ 412   2                      Delay5us();
+ 413   2                      sd_clk=1;//CLK High
+ 414   2                      Delay5us();
+ 415   2              }
+ 416   1              
+ 417   1              return Response;
+ 418   1      }
+ 419          
+ 420          /* 串行通信初始化*/
+ 421          void UartInit()
+ 422          {
+ 423   1              SCON = 0x50;                // uart 模式1 (8 bit), REN=1；
+ 424   1              TMOD = TMOD | 0x20 ;        // 定时器1 模式2；
+C51 COMPILER V8.16   SD                                                                    10/03/2010 14:34:31 PAGE 8   
+
+ 425   1      //      TH1  = 0xF7;                // 9600 Bds at 32MHz 
+ 426   1      //      TL1  = 0xF7;    
+ 427   1      
+ 428   1      
+ 429   1              TH1  = 0xFD;                // 9600 Bds at 11.059MHz 
+ 430   1              TL1  = 0xFD;    
+ 431   1       //     TH1  = 0xFA;                // 9600 Bds at 22.1184MHz 
+ 432   1       //     TL1  = 0xFA;    
+ 433   1       
+ 434   1              ES = 1;                     //允许uart中断；
+ 435   1              EA = 1;                     //允许CPU中断；
+ 436   1              TR1 = 1;                    //运行定时器1：
+ 437   1      }
+ 438                  
+ 439          void send_char_com(unsigned char ch)  
+ 440          {
+ 441   1          SBUF=ch;
+ 442   1          while(TI==0);
+ 443   1          TI=0;
+ 444   1      }
+ 445          
+ 446          //向串口发送一个字符串
+ 447          void send_string_com(unsigned char *str,unsigned int len)
+ 448          {
+ 449   1          unsigned char k=0;
+ 450   1       
+ 451   1          do 
+ 452   1          {
+ 453   2              send_char_com(*(str + k));
+ 454   2              k++;
+ 455   2          } while(k <len);
+ 456   1      
+ 457   1      }
+ 458          
+ 459          main()
+ 460          {
+ 461   1              unsigned int Data,M_Response;
+ 462   1          unsigned char i;
+ 463   1       
+ 464   1              //初始化要写入的数据
+ 465   1          for(i=0;i<128;i++)
+ 466   1              {
+ 467   2            if (i < 64)
+ 468   2                {
+ 469   3                  WriteBuffer[i]=0x4141;
+ 470   3                }
+ 471   2                else
+ 472   2                {
+ 473   3                      WriteBuffer[i]=0x4242;
+ 474   3                }
+ 475   2              }
+ 476   1      
+ 477   1          UartInit();
+ 478   1              TI = 0; 
+ 479   1          M_Response=0x0000;
+ 480   1              M_Response=SD_Overall_Initiation();
+ 481   1              M_Response=SD_CMD_Write(16,512,1,0);
+ 482   1              Data=SD_Get_CardID();
+ 483   1              Write_Single_Block(0x0000);
+ 484   1          Read_Single_Block(0x0000); 
+ 485   1       
+ 486   1          for(i=0; i<128; i++)
+C51 COMPILER V8.16   SD                                                                    10/03/2010 14:34:31 PAGE 9   
+
+ 487   1              {        
+ 488   2           send_char_com(ReadBuffer[i]>>8)  ; //向串口发送高8位数据
+ 489   2           send_char_com(ReadBuffer[i] )  ; 
+ 490   2              }
+ 491   1               
+ 492   1              while(1);        
+ 493   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1883    ----
+   CONSTANT SIZE    =     31    ----
+   XDATA SIZE       =    512    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     12      59
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

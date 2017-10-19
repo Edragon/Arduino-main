@@ -1,0 +1,41 @@
+#######################################
+# Syntax Coloring Map For SH1106_SPI
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+SH1106_SPI	KEYWORD1
+SH1106_SPI_FB	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	KEYWORD2
+clear	KEYWORD2
+gotoXY	KEYWORD2
+writeBitmap	KEYWORD2
+renderAll	KEYWORD2
+renderString	KEYWORD2
+setPixel	KEYWORD2
+writeLine	KEYWORD2
+writeRect	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+PIN_DC	LITERAL1
+PIN_RESET	LITERAL1
+PIN_CS	LITERAL1
+PINS_CS_DC	LITERAL1
+SH1106_COMMAND	LITERAL1
+SH1106_DATA	LITERAL1
+SH1106_X_PIXELS	LITERAL1
+SH1106_Y_PIXELS	LITERAL1
+SH1106_ROWS	LITERAL1
+SH1106_SUCCESS	LITERAL1
+SH1106_ERROR	LITERAL1
+BUF_LEN	LITERAL1
