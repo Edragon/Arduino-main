@@ -22,6 +22,22 @@ RHReliableDatagram manager(driver, CLIENT_ADDRESS);
 // Need this on Arduino Zero with SerialUSB port (eg RocketScream Mini Ultra Pro)
 //#define Serial SerialUSB
 
+void volt_read() 
+{
+  char data_volt[80]; 
+  char pre_volt[]= "this board battery level is: ";
+  char volt_char[5];
+  
+  float volt = analogRead(A7);
+  volt = volt / 217 ;            // calculate battery, linear
+  dtostrf(volt, 6, 2, volt_char);         // data to string
+
+  sprintf(data_volt,"%s %s", pre_volt, volt_char);    // combine char array
+  
+  Serial.println(data_volt);
+  delay(100);        // delay in between reads for stability
+}
+
 void setup()
 {
   // Rocket Scream Mini Ultra Pro with the RFM95W only:
@@ -57,6 +73,8 @@ uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
 
 void loop()
 {
+  volt_read(); // data_volt
+  
   Serial.println("Sending to rf95_reliable_datagram_server");
 
   // Send a message to manager_server
