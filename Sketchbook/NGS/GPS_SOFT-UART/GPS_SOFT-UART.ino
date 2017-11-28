@@ -9,7 +9,7 @@ SoftwareSerial mySerial(2, 3); // RX, TX
 void setup()
 {
   Serial.begin(9600);
-  mySerial.begin(38400);
+  mySerial.begin(9600);
 }
 
 void loop() // run over and over
@@ -19,8 +19,9 @@ void loop() // run over and over
     temp = mySerial.read();
     dataString += String(temp);
     index++;
-    if (index > 200)
+    if (index > 400)
       break;
   }
   Serial.print(dataString);
+  delay(1000);
 }
