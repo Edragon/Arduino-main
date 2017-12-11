@@ -37,11 +37,7 @@ void update_display() {
   display.println(pressed_btn);
   
   display.display();
-
-
   delay(1000);
-
-
 
 }
 

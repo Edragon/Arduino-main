@@ -1,3 +1,8 @@
+/*
+ * This demo code only demostrate it is working by read analog value, not able to get correct current value
+ * read a hair dry will get 2.4V~2.55V varying voltage, the amlification should be used for calculation.
+ */
+
 #include <SPI.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_PCD8544.h>
@@ -14,7 +19,7 @@ void setup()   {
   Serial.begin(9600);
 
   display.begin();
-  display.setContrast(200);
+  display.setContrast(50);
 
 }
 
