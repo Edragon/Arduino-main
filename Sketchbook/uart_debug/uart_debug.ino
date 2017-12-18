@@ -1,5 +1,5 @@
 #include <SoftwareSerial.h>
-SoftwareSerial serial_test(2, 3);
+SoftwareSerial serial_test(3, 4);
 
 void setup() {
   Serial.begin(9600);
