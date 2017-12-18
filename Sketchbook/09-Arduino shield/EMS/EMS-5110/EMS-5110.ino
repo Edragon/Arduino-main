@@ -12,7 +12,7 @@ float Pcur;
 float Pmax;
 float Pmin=100; 
 
-LCD5110 myGLCD(5,6,3);   // ??
+LCD5110 myGLCD(5,6,3);   // need to re-define
 
 extern unsigned char SmallFont[];
 
