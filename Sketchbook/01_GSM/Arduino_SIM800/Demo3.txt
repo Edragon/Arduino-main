@@ -1,0 +1,62 @@
+/*********************************************************************
+**  Device: EFCom GPRS Module                                       **
+**  File:   EF_GRPS.c                                               **
+**  Description:                                                    **
+**  This file is a sample code for your reference.                  **
+**  Serial Relay - Arduino will patch a serial link between the     **
+**  computer and the GPRS Shield at 19200 bps 8-N-1 Computer is     **
+**  connected to Hardware UART GPRS Shield is connected to the      **
+**  Software UART                                                   **
+**                                                                  **
+**  Copyright (C) 2011 ElecFreaks Corp.                     	    **
+**  Created by ElecFreaks Robi.W /15 May 2012                       **
+**  http://www.elecfreaks.com                                       **
+*********************************************************************/
+ 
+#include <LCD5110_Graph.h>
+#include <NewSoftSerial.h>
+
+LCD5110 myGLCD(9,10,11,12,13);
+ 
+extern uint8_t SmallFont[];
+ 
+#define rxPin 2
+#define txPin 3
+
+NewSoftSerial mySerial(rxPin, txPin);
+ 
+void setup()
+{
+  myGLCD.InitLCD();
+  myGLCD.setFont(SmallFont);
+ 
+  mySerial.begin(19200);                 // the GPRS baud rate   
+  Serial.begin(19200);                  // the Serial port baud rate   
+  Serial.println("ElecFreaks EFComs Start");
+ 
+  myGLCD.clrScr();
+  myGLCD.print("ElecFreaks.com", CENTER, 0);
+  myGLCD.print("EFCom GPRS", LEFT, 12);
+  myGLCD.print("GSM Beta V1.0", LEFT, 30);
+  myGLCD.update();
+}
+ 
+void loop()
+{
+    int i = 0;
+    char someChar[32] = {0};
+    if(Serial.available())
+    {
+        do{
+          someChar[i++] = Serial.read();
+        }while (Serial.available());
+        mySerial.print(someChar);
+     }  
+    else if(mySerial.available())
+    {
+       do{
+          someChar[i++] = mySerial.read();
+        }while (Serial.available());
+        Serial.print(someChar);
+     }
+}

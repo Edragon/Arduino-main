@@ -1,0 +1,28 @@
+//Serial Relay - Arduino will patch a 
+//serial link between the computer and the GPRS Shield
+//at 19200 bps 8-N-1
+//Computer is connected to Hardware UART
+//GPRS Shield is connected to the Software UART 
+ 
+#include <NewSoftSerial.h>
+ 
+NewSoftSerial mySerial(2, 3);
+ 
+void setup()
+{
+  mySerial.begin(19200);               // the GPRS baud rate   
+  Serial.begin(19200);                 // the GPRS baud rate   
+}
+ 
+void loop()
+{
+    if(Serial.available())
+    {
+       mySerial.print((unsigned char)Serial.read());
+     }  
+    else  if(mySerial.available())
+    {
+       Serial.print((unsigned char)mySerial.read());
+     }   
+ 
+}
