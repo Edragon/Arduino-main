@@ -1,0 +1,6 @@
+# Output of mkdocs
+/site/
+
+/config.json
+*.filters
+*.vcxitems

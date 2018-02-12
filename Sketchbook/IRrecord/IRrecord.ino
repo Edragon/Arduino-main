@@ -18,7 +18,7 @@
 #include <IRremote.h>
 
 int RECV_PIN = 2;
-int BUTTON_PIN = 4;
+int BUTTON_PIN = 5;
 int STATUS_PIN = 6;
 
 IRrecv irrecv(RECV_PIN);

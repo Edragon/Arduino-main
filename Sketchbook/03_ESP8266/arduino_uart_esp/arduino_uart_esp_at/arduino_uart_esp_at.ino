@@ -1,7 +1,7 @@
 #include <SoftwareSerial.h>
 
 const byte rxPin = 3; // Wire this to Tx Pin of ESP8266
-const byte txPin = 2; // Wire this to Rx Pin of ESP8266
+const byte txPin = 4; // Wire this to Rx Pin of ESP8266
 
 // We'll use a software serial interface to connect to ESP8266
 SoftwareSerial ESP8266 (rxPin, txPin);
