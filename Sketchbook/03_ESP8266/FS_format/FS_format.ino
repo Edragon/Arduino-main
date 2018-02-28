@@ -2,9 +2,7 @@
 #include <FS.h>                   //this needs to be first, or it all crashes and burns...
 
 void setup() {
-  //ESP.wdtDisable();
-  //ESP.wdtEnable(WDTO_8S);
-
+  // put your setup code here, to run once:
   delay(1000);
   Serial.println("....");
   delay(1000);
@@ -19,7 +17,6 @@ void setup() {
 }
 
 void loop() {
-  //ESP.wdtFeed();
   // put your main code here, to run repeatedly:
 
 }
