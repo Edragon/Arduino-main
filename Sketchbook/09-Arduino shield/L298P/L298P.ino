@@ -57,11 +57,15 @@ void read_6050() {
 
 void short_beep() {
   digitalWrite(beep, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(500);                       // wait for a second
+  delay(100);                       // wait for a second
   digitalWrite(beep, LOW);    // turn the LED off by making the voltage LOW
   delay(100);                       // wait for a second
   digitalWrite(beep, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(500);                       // wait for a second
+  delay(100);                       // wait for a second
+  digitalWrite(beep, LOW);    // turn the LED off by making the voltage LOW
+  delay(100);
+  digitalWrite(beep, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(100);                       // wait for a second
   digitalWrite(beep, LOW);    // turn the LED off by making the voltage LOW
   delay(100);
 }
@@ -113,6 +117,7 @@ void loop() {
   }
 
   else if  ( AcX < 10000 and DIR == false) {
+    Break = true;
     Serial.println("Full speed forward! ");
     DIR = true;
     short_beep();

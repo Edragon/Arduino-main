@@ -1,0 +1,554 @@
+C51 COMPILER V9.56.0.0   LCD                                                               11/07/2017 17:19:47 PAGE 1   
+
+
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE LCD
+OBJECT MODULE PLACED IN .\obj\LCD.obj
+COMPILER INVOKED BY: d:\Keil_v5\C51\BIN\C51.EXE LCD\LCD.c LARGE BROWSE INCDIR(.\font;.\LCD;.\sys;.\touch;.\GUI;.\USER) D
+                    -EBUG OBJECTEXTEND PRINT(.\LCD.lst) TABS(2) OBJECT(.\obj\LCD.obj)
+
+line level    source
+
+   1          #include "sys.h"
+   2          #include "lcd.h"
+   3          //////////////////////////////////////////////////////////////////////////////////   
+   4          //本程序只供学习使用，未经作者许可，不得用于其它任何用途
+   5          //测试硬件：单片机STC12LE5A60S2,晶振30M  单片机工作电压3.3V
+   6          //QDtech-TFT液晶驱动 for C51
+   7          //xiao冯@ShenZhen QDtech co.,LTD
+   8          //公司网站:www.qdtech.net
+   9          //淘宝网站：http://qdtech.taobao.com
+  10          //我司提供技术支持，任何技术问题欢迎随时交流学习
+  11          //固话(传真) :+86 0755-23594567 
+  12          //手机:15989313508（冯工） 
+  13          //邮箱:QDtech2008@gmail.com 
+  14          //Skype:QDtech2008
+  15          //技术交流QQ群:324828016
+  16          //创建日期:2013/5/13
+  17          //版本：V1.1
+  18          //版权所有，盗版必究。
+  19          //Copyright(C) 深圳市全动电子技术有限公司 2009-2019
+  20          //All rights reserved
+  21          //********************************************************************************
+  22          
+  23          /****************************************************************************************************
+  24          //=========================================电源接线================================================//
+  25          //5V接DC 5V电源
+  26          //3V3 不用接
+  27          //GND接地
+  28          //=======================================液晶屏数据线接线==========================================//
+  29          //本模块默认数据总线类型为8位并行模式
+  30          //8位模式接线：
+  31          //液晶屏LCD_D0对应单片机P0.0
+  32          //液晶屏LCD_D1对应单片机P0.1
+  33          //液晶屏LCD_D2对应单片机P0.2
+  34          //液晶屏LCD_D3对应单片机P0.3
+  35          //液晶屏LCD_D4对应单片机P0.4
+  36          //液晶屏LCD_D5对应单片机P0.5
+  37          //液晶屏LCD_D6对应单片机P0.6
+  38          //液晶屏LCD_D7对应单片机P0.7
+  39          //=======================================液晶屏控制线接线==========================================//
+  40          //LCD_RST 接P3.3  //复位信号
+  41          //LCD_CS  接P1.3  //片选信号
+  42          //LCD_RS  接P1.2  //寄存器/数据选择信号
+  43          //LCD_WR  接P1.1  //写信号
+  44          //LCD_RD  接P1.0  //读信号
+  45          //=========================================触摸屏触接线=========================================//
+  46          //本程序不进行触摸测试。
+  47          //如需测试触摸功能，请使用Arduino配套程序进行测试
+  48          **************************************************************************************************/ 
+  49          
+  50          
+  51          
+  52          //LCD的画笔颜色和背景色    
+  53          u16 POINT_COLOR=0x0000; //画笔颜色
+  54          u16 BACK_COLOR=0xFFFF;  //背景色 
+C51 COMPILER V9.56.0.0   LCD                                                               11/07/2017 17:19:47 PAGE 2   
+
+  55          //管理LCD重要参数
+  56          //默认为竖屏
+  57          _lcd_dev lcddev;
+  58          
+  59          
+  60          
+  61          //******************************************************************
+  62          //函数名：  LCD_Write_Bus
+  63          //作者：    xiao冯@全动电子
+  64          //日期：    2013-02-22
+  65          //功能：    向液晶屏总线写入数据(LCD驱动内部函数)
+  66          //输入参数：VH:高8位数据
+  67          //          VL:低8位数据
+  68          //返回值：  无
+  69          //修改记录：无
+  70          //******************************************************************
+  71          
+  72          void LCD_Write_Bus(char VH,char VL)   
+  73          {
+  74   1        LCD_CS=0; 
+  75   1        LCD_DataPortH=VH; 
+  76   1        LCD_DataPortL=VL;   
+  77   1        LCD_WR=0;
+  78   1        LCD_WR=1; 
+  79   1        LCD_CS=1;
+  80   1      }
+  81          
+  82          
+  83          
+  84          //******************************************************************
+  85          //函数名：  LCD_WR_DATA8
+  86          //作者：    xiao冯@全动电子
+  87          //日期：    2013-02-22
+  88          //功能：    向液晶屏总线写入写8位数据
+  89          //输入参数：VH:高8位数据
+  90          //          VL:低8位数据
+  91          //返回值：  无
+  92          //修改记录：无
+  93          //******************************************************************
+  94          void LCD_WR_DATA8(char VH,char VL) 
+  95          {
+  96   1        LCD_RS=1;
+  97   1        LCD_Write_Bus(VH,VL);
+  98   1      } 
+  99          
+ 100          //******************************************************************
+ 101          //函数名：  LCD_WR_REG
+ 102          //作者：    xiao冯@全动电子
+ 103          //日期：    2013-02-22
+ 104          //功能：    向液晶屏总线写入写16位指令
+ 105          //输入参数：Reg:待写入的指令值
+ 106          //返回值：  无
+ 107          //修改记录：无
+ 108          //******************************************************************
+ 109          void LCD_WR_REG(int Reg)   
+ 110          { 
+ 111   1        LCD_RS=0;
+ 112   1        LCD_Write_Bus(Reg>>8,Reg);
+ 113   1      } 
+ 114          
+ 115          //******************************************************************
+ 116          //函数名：  LCD_WR_DATA
+C51 COMPILER V9.56.0.0   LCD                                                               11/07/2017 17:19:47 PAGE 3   
+
+ 117          //作者：    xiao冯@全动电子
+ 118          //日期：    2013-02-22
+ 119          //功能：    向液晶屏总线写入写16位数据
+ 120          //输入参数：Data:待写入的数据
+ 121          //返回值：  无
+ 122          //修改记录：无
+ 123          //******************************************************************
+ 124           void LCD_WR_DATA(int Data)
+ 125          {
+ 126   1        LCD_RS=1;
+ 127   1        LCD_Write_Bus(Data>>8,Data);
+ 128   1      }
+ 129          
+ 130          //******************************************************************
+ 131          //函数名：  LCD_WriteReg
+ 132          //作者：    xiao冯@全动电子
+ 133          //日期：    2013-02-22
+ 134          //功能：    写寄存器数据
+ 135          //输入参数：LCD_Reg:寄存器地址
+ 136          //      LCD_RegValue:要写入的数据
+ 137          //返回值：  无
+ 138          //修改记录：无
+ 139          //******************************************************************
+ 140          void LCD_WriteReg(u16 LCD_Reg, u16 LCD_RegValue)
+ 141          {
+ 142   1        LCD_WR_REG(LCD_Reg);
+ 143   1        LCD_WR_DATA(LCD_RegValue);
+ 144   1      }
+ 145          
+ 146          //******************************************************************
+ 147          //函数名：  LCD_WriteRAM_Prepare
+ 148          //作者：    xiao冯@全动电子
+ 149          //日期：    2013-02-22
+ 150          //功能：    开始写GRAM
+ 151          //      在给液晶屏传送RGB数据前，应该发送写GRAM指令
+ 152          //输入参数：无
+ 153          //返回值：  无
+ 154          //修改记录：无
+ 155          //******************************************************************
+ 156          void LCD_WriteRAM_Prepare(void)
+ 157          {
+ 158   1        LCD_WR_REG(lcddev.wramcmd);   
+ 159   1      }
+ 160          
+ 161          
+ 162          //******************************************************************
+ 163          //函数名：  LCD_Clear
+ 164          //作者：    xiao冯@全动电子
+ 165          //日期：    2013-02-22
+ 166          //功能：    LCD全屏填充清屏函数
+ 167          //输入参数：Color:要清屏的填充色
+ 168          //返回值：  无
+ 169          //修改记录：无
+ 170          //******************************************************************
+ 171          void LCD_Clear(u16 Color)
+ 172          {
+ 173   1        u32 index=0;      
+ 174   1        LCD_SetWindows(0,0,lcddev.width-1,lcddev.height-1); 
+ 175   1      #if LCD_USE8BIT_MODEL==1
+ 176   1        LCD_RS=1;//写数据 
+ 177   1        LCD_CS=0;    
+ 178   1        for(index=0;index<lcddev.width*lcddev.height;index++)
+C51 COMPILER V9.56.0.0   LCD                                                               11/07/2017 17:19:47 PAGE 4   
+
+ 179   1        {
+ 180   2          LCD_DataPortL=(Color>>8); 
+ 181   2          LCD_WR=0;
+ 182   2          LCD_WR=1; 
+ 183   2          
+ 184   2          LCD_DataPortL=Color;  
+ 185   2          LCD_WR=0;
+ 186   2          LCD_WR=1;   
+ 187   2        }
+ 188   1        LCD_CS=1; 
+ 189   1      #else //16位模式
+                for(index=0;index<lcddev.width*lcddev.height;index++)
+                {
+                  LCD_WR_DATA(Color);     
+                }
+              #endif
+ 195   1        
+ 196   1      } 
+ 197          
+ 198          //******************************************************************
+ 199          //函数名：  LCD_DrawPoint
+ 200          //作者：    xiao冯@全动电子
+ 201          //日期：    2013-02-22
+ 202          //功能：    在指定位置写入一个像素点数据
+ 203          //输入参数：(x,y):光标坐标
+ 204          //返回值：  无
+ 205          //修改记录：无
+ 206          //******************************************************************
+ 207          void LCD_DrawPoint(u16 x,u16 y)
+ 208          {
+ 209   1        LCD_SetCursor(x,y);//设置光标位置 
+ 210   1      #if LCD_USE8BIT_MODEL==1
+ 211   1        LCD_CS=0;
+ 212   1        LCD_RD=1;
+ 213   1        LCD_RS=1;//写地址    
+ 214   1        LCD_DataPortL=(POINT_COLOR>>8); 
+ 215   1        LCD_WR=0;
+ 216   1        LCD_WR=1;
+ 217   1        LCD_DataPortL=POINT_COLOR;  
+ 218   1        LCD_WR=0;
+ 219   1        LCD_WR=1;  
+ 220   1        LCD_CS=1;
+ 221   1      #else
+                LCD_WR_DATA(POINT_COLOR); 
+              #endif
+ 224   1      }  
+ 225          //******************************************************************
+ 226          //函数名：  LCD_DrawPoint_16Bit
+ 227          //作者：    xiao冯@全动电子
+ 228          //日期：    2013-02-22
+ 229          //功能：    8位总线下如何写入一个16位数据
+ 230          //输入参数：(x,y):光标坐标
+ 231          //返回值：  无
+ 232          //修改记录：无
+ 233          //******************************************************************
+ 234          void LCD_DrawPoint_16Bit(u16 color)
+ 235          {
+ 236   1      #if LCD_USE8BIT_MODEL==1
+ 237   1        LCD_CS=0;
+ 238   1        LCD_RD=1;
+ 239   1        LCD_RS=1;//写地址    
+ 240   1        LCD_DataPortL=(color>>8); 
+C51 COMPILER V9.56.0.0   LCD                                                               11/07/2017 17:19:47 PAGE 5   
+
+ 241   1        LCD_WR=0;
+ 242   1        LCD_WR=1;
+ 243   1        LCD_DataPortL=color;  
+ 244   1        LCD_WR=0;
+ 245   1        LCD_WR=1;  
+ 246   1        LCD_CS=1;
+ 247   1      #else
+                LCD_WR_DATA(color); 
+              #endif
+ 250   1      
+ 251   1      
+ 252   1      }
+ 253          //******************************************************************
+ 254          //函数名：  LCD_Reset
+ 255          //作者：    xiao冯@全动电子
+ 256          //日期：    2013-02-22
+ 257          //功能：    LCD复位函数，液晶初始化前要调用此函数
+ 258          //输入参数：无
+ 259          //返回值：  无
+ 260          //修改记录：无
+ 261          //******************************************************************
+ 262          void LCD_Reset(void)
+ 263          {
+ 264   1        LCD_RESET=1;
+ 265   1        delay_ms(50); 
+ 266   1        LCD_RESET=0;
+ 267   1        delay_ms(50);
+ 268   1        LCD_RESET=1;
+ 269   1        delay_ms(50);
+ 270   1      }
+ 271          
+ 272          //******************************************************************
+ 273          //函数名：  LCD_Init
+ 274          //作者：    xiao冯@全动电子
+ 275          //日期：    2013-02-22
+ 276          //功能：    LCD初始化
+ 277          //输入参数：无
+ 278          //返回值：  无
+ 279          //修改记录：无
+ 280          //******************************************************************
+ 281          void LCD_Init(void)
+ 282          {
+ 283   1        LCD_Reset(); //初始化之前复位
+ 284   1        LCD_RD=1;  //RD引脚没有用到，拉高处理
+ 285   1      
+ 286   1        //ILI9486初始化
+ 287   1        LCD_WR_REG(0XF9);
+ 288   1        LCD_WR_DATA(0x00);
+ 289   1        LCD_WR_DATA(0x08);
+ 290   1        
+ 291   1        LCD_WR_REG(0xC0);
+ 292   1        LCD_WR_DATA(0x19);//VREG1OUT POSITIVE
+ 293   1        LCD_WR_DATA(0x1a);//VREG2OUT NEGATIVE
+ 294   1        
+ 295   1        LCD_WR_REG(0xC1);
+ 296   1        LCD_WR_DATA(0x45);//VGH,VGL    VGH>=14V.
+ 297   1        LCD_WR_DATA(0x00);
+ 298   1        
+ 299   1        LCD_WR_REG(0xC2);
+ 300   1        LCD_WR_DATA(0x33);
+ 301   1        
+ 302   1        LCD_WR_REG(0XC5);
+C51 COMPILER V9.56.0.0   LCD                                                               11/07/2017 17:19:47 PAGE 6   
+
+ 303   1        LCD_WR_DATA(0x00);
+ 304   1        LCD_WR_DATA(0x28);//VCM_REG[7:0]. <=0X80.
+ 305   1          
+ 306   1        LCD_WR_REG(0xB1);//OSC Freq set.
+ 307   1        LCD_WR_DATA(0x90);//0xA0=62HZ,0XB0 =70HZ, <=0XB0.
+ 308   1        LCD_WR_DATA(0x11);
+ 309   1        
+ 310   1        LCD_WR_REG(0xB4);
+ 311   1        LCD_WR_DATA(0x02); //2 DOT FRAME MODE,F<=70HZ.
+ 312   1        
+ 313   1        LCD_WR_REG(0xB6);
+ 314   1        LCD_WR_DATA(0x00);
+ 315   1        LCD_WR_DATA(0x42);//0 GS SS SM ISC[3:0];
+ 316   1        LCD_WR_DATA(0x3B);
+ 317   1          
+ 318   1        LCD_WR_REG(0xB7);
+ 319   1        LCD_WR_DATA(0x07);
+ 320   1        
+ 321   1        LCD_WR_REG(0xE0);
+ 322   1        LCD_WR_DATA(0x1F);
+ 323   1        LCD_WR_DATA(0x25);
+ 324   1        LCD_WR_DATA(0x22);
+ 325   1        LCD_WR_DATA(0x0B);
+ 326   1        LCD_WR_DATA(0x06);
+ 327   1        LCD_WR_DATA(0x0A);
+ 328   1        LCD_WR_DATA(0x4E);
+ 329   1        LCD_WR_DATA(0xC6);
+ 330   1        LCD_WR_DATA(0x39);
+ 331   1        LCD_WR_DATA(0x00);
+ 332   1        LCD_WR_DATA(0x00);
+ 333   1        LCD_WR_DATA(0x00);
+ 334   1        LCD_WR_DATA(0x00);
+ 335   1        LCD_WR_DATA(0x00);
+ 336   1        LCD_WR_DATA(0x00);
+ 337   1        
+ 338   1        LCD_WR_REG(0XE1);
+ 339   1        LCD_WR_DATA(0x1F);
+ 340   1        LCD_WR_DATA(0x3F);
+ 341   1        LCD_WR_DATA(0x3F);
+ 342   1        LCD_WR_DATA(0x0F);
+ 343   1        LCD_WR_DATA(0x1F);
+ 344   1        LCD_WR_DATA(0x0F);
+ 345   1        LCD_WR_DATA(0x46);
+ 346   1        LCD_WR_DATA(0x49);
+ 347   1        LCD_WR_DATA(0x31);
+ 348   1        LCD_WR_DATA(0x05);
+ 349   1        LCD_WR_DATA(0x09);
+ 350   1        LCD_WR_DATA(0x03);
+ 351   1        LCD_WR_DATA(0x1C);
+ 352   1        LCD_WR_DATA(0x1A);
+ 353   1        LCD_WR_DATA(0x00);
+ 354   1        
+ 355   1        LCD_WR_REG(0XF1);
+ 356   1        LCD_WR_DATA(0x36);
+ 357   1        LCD_WR_DATA(0x04);
+ 358   1        LCD_WR_DATA(0x00);
+ 359   1        LCD_WR_DATA(0x3C);
+ 360   1        LCD_WR_DATA(0x0F);
+ 361   1        LCD_WR_DATA(0x0F);
+ 362   1        LCD_WR_DATA(0xA4);
+ 363   1        LCD_WR_DATA(0x02);
+ 364   1        
+C51 COMPILER V9.56.0.0   LCD                                                               11/07/2017 17:19:47 PAGE 7   
+
+ 365   1        LCD_WR_REG(0XF2);
+ 366   1        LCD_WR_DATA(0x18);
+ 367   1        LCD_WR_DATA(0xA3);
+ 368   1        LCD_WR_DATA(0x12);
+ 369   1        LCD_WR_DATA(0x02);
+ 370   1        LCD_WR_DATA(0x32);
+ 371   1        LCD_WR_DATA(0x12);
+ 372   1        LCD_WR_DATA(0xFF);
+ 373   1        LCD_WR_DATA(0x32);
+ 374   1        LCD_WR_DATA(0x00);
+ 375   1        
+ 376   1        LCD_WR_REG(0XF4);
+ 377   1        LCD_WR_DATA(0x40);
+ 378   1        LCD_WR_DATA(0x00);
+ 379   1        LCD_WR_DATA(0x08);
+ 380   1        LCD_WR_DATA(0x91);
+ 381   1        LCD_WR_DATA(0x04);
+ 382   1        
+ 383   1        LCD_WR_REG(0XF8);
+ 384   1        LCD_WR_DATA(0x21);
+ 385   1        LCD_WR_DATA(0x04);
+ 386   1        
+ 387   1        LCD_WR_REG(0x36);
+ 388   1        LCD_WR_DATA(0x48);
+ 389   1        
+ 390   1        LCD_WR_REG(0x3A);
+ 391   1        LCD_WR_DATA(0x55);
+ 392   1        
+ 393   1        LCD_WR_REG(0x11);
+ 394   1        delay_ms(120);
+ 395   1        //LCD_WR_REG(0x21);
+ 396   1        LCD_WR_REG(0x29);
+ 397   1      
+ 398   1        //设置LCD属性参数
+ 399   1        LCD_SetParam();//设置LCD参数   
+ 400   1        LCD_BL=1;//点亮背光  
+ 401   1      }
+ 402          //******************************************************************
+ 403          //函数名：  LCD_SetWindows
+ 404          //作者：    xiao冯@全动电子
+ 405          //日期：    2013-02-22
+ 406          //功能：    设置显示窗口
+ 407          //输入参数：(xStar,yStar):窗口左上角起始坐标
+ 408          //        (xEnd,yEnd):窗口右下角结束坐标
+ 409          //返回值：  无
+ 410          //修改记录：无
+ 411          //******************************************************************
+ 412          void LCD_SetWindows(u16 xStar, u16 yStar,u16 xEnd,u16 yEnd)
+ 413          { 
+ 414   1        LCD_WR_REG(lcddev.setxcmd); 
+ 415   1        LCD_WR_DATA(xStar>>8);
+ 416   1        LCD_WR_DATA(0x00FF&xStar);    
+ 417   1        LCD_WR_DATA(xEnd>>8);
+ 418   1        LCD_WR_DATA(0x00FF&xEnd);
+ 419   1      
+ 420   1        LCD_WR_REG(lcddev.setycmd); 
+ 421   1        LCD_WR_DATA(yStar>>8);
+ 422   1        LCD_WR_DATA(0x00FF&yStar);    
+ 423   1        LCD_WR_DATA(yEnd>>8);
+ 424   1        LCD_WR_DATA(0x00FF&yEnd);
+ 425   1      
+ 426   1        LCD_WriteRAM_Prepare(); //开始写入GRAM      
+C51 COMPILER V9.56.0.0   LCD                                                               11/07/2017 17:19:47 PAGE 8   
+
+ 427   1      }   
+ 428          
+ 429          //******************************************************************
+ 430          //函数名：  LCD_SetCursor
+ 431          //作者：    xiao冯@全动电子
+ 432          //日期：    2013-02-22
+ 433          //功能：    设置光标位置
+ 434          //输入参数：Xpos:横坐标
+ 435          //      Ypos:纵坐标
+ 436          //返回值：  无
+ 437          //修改记录：无
+ 438          //******************************************************************
+ 439          void LCD_SetCursor(u16 Xpos, u16 Ypos)
+ 440          {               
+ 441   1        LCD_WR_REG(lcddev.setxcmd); 
+ 442   1        LCD_WR_DATA(Xpos>>8);
+ 443   1        LCD_WR_DATA(0x00FF&Xpos);   
+ 444   1        LCD_WR_DATA((Xpos+1)>>8);
+ 445   1        LCD_WR_DATA((Xpos+1));
+ 446   1        
+ 447   1        LCD_WR_REG(lcddev.setycmd); 
+ 448   1        LCD_WR_DATA(Ypos>>8);
+ 449   1        LCD_WR_DATA(0x00FF&Ypos);   
+ 450   1        LCD_WR_DATA((Ypos+1)>>8);
+ 451   1        LCD_WR_DATA((Ypos+1));
+ 452   1        LCD_WriteRAM_Prepare(); //开始写入GRAM    
+ 453   1      } 
+ 454          
+ 455          //******************************************************************
+ 456          //函数名：  LCD_SetParam
+ 457          //作者：    xiao冯@全动电子
+ 458          //日期：    2013-02-22
+ 459          //功能：    设置LCD参数，方便进行横竖屏模式切换
+ 460          //输入参数：无
+ 461          //返回值：  无
+ 462          //修改记录：无
+ 463          //******************************************************************
+ 464          void LCD_SetParam(void)
+ 465          { 
+ 466   1        lcddev.setxcmd=0x2A;
+ 467   1        lcddev.setycmd=0x2B;
+ 468   1        lcddev.wramcmd=0x2C;
+ 469   1      #if USE_HORIZONTAL==1 //使用横屏    
+ 470   1        lcddev.dir=1;//横屏
+ 471   1        lcddev.width=480;
+ 472   1        lcddev.height=320;      
+ 473   1        LCD_WriteReg(0x36,(1<<3)|(1<<7)|(1<<5));//BGR==1,MY==1,MX==0,MV==1
+ 474   1      #else//竖屏
+                lcddev.dir=0;//竖屏             
+                lcddev.width=320;
+                lcddev.height=480;  
+                LCD_WriteReg(0x36,(1<<3)|(1<<6)|(1<<7));//BGR==1,MY==0,MX==0,MV==0
+              #endif
+ 480   1      }   
+ 481          
+ 482          void LCD_direction(u8 direction )
+ 483          { 
+ 484   1        switch(direction){
+ 485   2          case 3:
+ 486   2            lcddev.width=480;
+ 487   2            lcddev.height=320;
+ 488   2            LCD_WriteReg(0x36,(1<<3)|(1<<7)|(1<<5));//BGR==1,MY==1,MX==0,MV==1
+C51 COMPILER V9.56.0.0   LCD                                                               11/07/2017 17:19:47 PAGE 9   
+
+ 489   2          break;
+ 490   2          case 1:
+ 491   2            lcddev.width=480;
+ 492   2            lcddev.height=320;
+ 493   2            LCD_WriteReg(0x36,(1<<3)|(0<<7)|(1<<6)|(1<<5));//BGR==1,MY==1,MX==0,MV==1
+ 494   2          break;
+ 495   2          case 2:                 
+ 496   2            lcddev.width=320;
+ 497   2            lcddev.height=480;  
+ 498   2            LCD_WriteReg(0x36,(1<<3)|(1<<6)|(1<<7));//BGR==1,MY==0,MX==0,MV==0
+ 499   2          break;
+ 500   2          case 0:                 
+ 501   2            lcddev.width=320;
+ 502   2            lcddev.height=480;  
+ 503   2            LCD_WriteReg(0x36,(1<<3)|(0<<6)|(0<<7));//BGR==1,MY==0,MX==0,MV==0
+ 504   2          break;
+ 505   2          default:break;
+ 506   2        }
+ 507   1          
+ 508   1      
+ 509   1      }  
+ 510          
+ 511          
+ 512          
+ 513          
+ 514          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1120    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =     17      16
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
