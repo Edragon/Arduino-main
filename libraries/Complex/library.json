@@ -1,0 +1,24 @@
+{
+  "name": "Complex",
+  "keywords": "Complex,numbers,Imaginary,phase,modulus,polar,conjugate,math,sin,cos,tan,exp,pow",
+  "description": "Library for Complex math.",
+  "authors":
+  [
+    {
+      "name": "Rob Tillaart",
+      "email": "Rob.Tillaart@gmail.com",
+      "maintainer": true
+    }
+  ],
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/RobTillaart/Arduino.git"
+  },
+  "version":"0.1.12",
+  "frameworks": "arduino",
+  "platforms": "*",
+  "export": {
+    "include": "libraries/Complex"
+  }
+}

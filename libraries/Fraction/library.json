@@ -1,0 +1,24 @@
+{
+  "name": "Fraction",
+  "keywords": "Fraction,quotient,math,nominator,denominator",
+  "description": "Library for using fractions.",
+  "authors":
+  [
+    {
+      "name": "Rob Tillaart",
+      "email": "Rob.Tillaart@gmail.com",
+      "maintainer": true
+    }
+  ],
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/RobTillaart/Arduino.git"
+  },
+  "version":"0.1.8",
+  "frameworks": "arduino",
+  "platforms": "*",
+  "export": {
+    "include": "libraries/Fraction"
+  }
+}

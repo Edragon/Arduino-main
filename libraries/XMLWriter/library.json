@@ -1,0 +1,24 @@
+{
+  "name": "XMLWriter",
+  "keywords": "Write,XML,node,header,tag,indent,field,stream",
+  "description": "Library for writing XML files.",
+  "authors":
+  [
+    {
+      "name": "Rob Tillaart",
+      "email": "Rob.Tillaart@gmail.com",
+      "maintainer": true
+    }
+  ],
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/RobTillaart/Arduino.git"
+  },
+  "version":"0.1.8",
+  "frameworks": "arduino",
+  "platforms": "*",
+  "export": {
+    "include": "libraries/XMLWriter"
+  }
+}

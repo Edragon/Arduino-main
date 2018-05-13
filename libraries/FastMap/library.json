@@ -1,0 +1,24 @@
+{
+  "name": "FastMap",
+  "keywords": "Fast,map,lookup,table",
+  "description": "Library with fast map function for Arduino.",
+  "authors":
+  [
+    {
+      "name": "Rob Tillaart",
+      "email": "Rob.Tillaart@gmail.com",
+      "maintainer": true
+    }
+  ],
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/RobTillaart/Arduino.git"
+  },
+  "version":"0.1.8",
+  "frameworks": "arduino",
+  "platforms": "*",
+  "export": {
+    "include": "libraries/FastMap"
+  }
+}

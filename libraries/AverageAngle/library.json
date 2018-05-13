@@ -1,0 +1,24 @@
+{
+  "name": "AverageAngle",
+  "keywords": "Angle,average,RADIANS,DEGREES,heading",
+  "description": "Library to average angles.",
+  "authors":
+  [
+    {
+      "name": "Rob Tillaart",
+      "email": "Rob.Tillaart@gmail.com",
+      "maintainer": true
+    }
+  ],
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/RobTillaart/Arduino.git"
+  },
+  "version":"0.1.2",
+  "frameworks": "arduino",
+  "platforms": "*",
+  "export": {
+    "include": "libraries/AverageAngle"
+  }
+}
