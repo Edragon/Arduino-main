@@ -72,31 +72,12 @@ void PCF_8574_read_joystick () {
   }
 }
 
-void PCF_8574_off_buzzer() {
-  PCF_01.begin();
-  PCF_01.write(5, 0);
-  delay(1000);
-}
 
 void PCF_8574_write_buzzer(int d)
 {
   PCF_01.begin();
-  //turn P0 (pin 4) of the I/O expander on and off once a second
-  //PCF_01.write(6, 1);
   PCF_01.write(5, 1);
-  //PCF_01.write(4, 1);
-  //PCF_01.write(3, 1);
-  //PCF_01.write(2, 1);
-  //PCF_01.write(1, 1);
-  //PCF_01.write(0, 1);
   delay(d);
-
-  //PCF_01.write(6, 0);
   PCF_01.write(5, 0);
-  //PCF_01.write(4, 0);
-  //PCF_01.write(3, 0);
-  //PCF_01.write(2, 0);
-  //PCF_01.write(1, 0);
-  //PCF_01.write(0, 0);
   delay(d);
 }

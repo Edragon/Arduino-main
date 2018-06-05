@@ -24,13 +24,13 @@ void setup()
 }
 
 void loop() {
-  PCF_8574_off_buzzer(); //turn off buzzer fist
-
-  //PCF_8574_read_write(); // this one not working !! please use another sketch!
   
-  //PCF_8591_write();
 
-  //PCF_8591_read();
+  PCF_8574_read_joystick_write_buzzer(); // this one not working !! please use another sketch!
+  
+  //PCF_8591_write(); // DAC, dim LED
+
+  //PCF_8591_read();  //ADC
 
   //PCF_8574_read_joystick();
 

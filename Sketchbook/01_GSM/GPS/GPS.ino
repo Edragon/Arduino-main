@@ -5,7 +5,11 @@ void setup() {
   Serial.begin(9600);
   mySerial.begin(9600);
 
+  // boot by pin 8
+  pinMode(8, OUTPUT);
+  digitalWrite(8, HIGH);
   delay(5000);
+  digitalWrite(8, LOW);
 }
 
 
