@@ -1,6 +1,10 @@
 int i = 0;
 char received[13];
-int flag_print_card_num = 0;
+
+
+// connect EL125 ground to arduino ground
+// connect EL125 TX pin to arduino D0 pin
+//
 
 void setup()
 {
@@ -13,7 +17,6 @@ void loop()
 
   if (Serial.available() > 0)
   {
-    flag_print_card_num = 1;
     received[i] = Serial.read();
     Serial.print(received[i], HEX);
     //Serial.print(received[i], DEC);
