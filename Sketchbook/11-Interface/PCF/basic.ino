@@ -21,6 +21,7 @@ void PCF_8591_write()
   }
 }
 
+
 void PCF_8591_read () {
   Wire.beginTransmission(PCF8591);
   Wire.write(0x04);
@@ -33,16 +34,16 @@ void PCF_8591_read () {
   adcvalue2 = Wire.read();
   adcvalue3 = Wire.read();
 
-  Serial.print("AIN0: ");
+  Serial.print("AIN3: ");
   Serial.print(adcvalue0);
   Serial.print(" ,");
-  Serial.print("AIN1 Sensor: ");
+  Serial.print("AIN0: ");
   Serial.print(adcvalue1);  // sensor
   Serial.print(" ,");
-  Serial.print("AIN2: ");
+  Serial.print("AIN1: ");
   Serial.print(adcvalue2);
   Serial.print(" ,");
-  Serial.print("AIN3 Potentiometer: ");
+  Serial.print("AIN2: ");
   Serial.print(adcvalue3);  // Trim pot
   Serial.println();
   delay(1000);

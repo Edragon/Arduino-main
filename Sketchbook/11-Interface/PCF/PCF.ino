@@ -30,6 +30,7 @@ void loop() {
   
   //PCF_8591_write(); // DAC, dim LED
 
+  // sensor AIN3, pot trim on AIN2
   //PCF_8591_read();  //ADC
 
   //PCF_8574_read_joystick();
