@@ -1,10 +1,10 @@
 #include <SoftwareSerial.h>
-SoftwareSerial serial_test(3, 4);
+SoftwareSerial serial_test(6,7);
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   while (!Serial);
-  serial_test.begin(9600);
+  serial_test.begin(115200);
   delay(1000);
   Serial.println("Setup Complete!");
   //serial_test.println("AT+RST");

@@ -1,23 +1,21 @@
 #include <SoftwareSerial.h>
-SoftwareSerial mySerial(6, 7);
+SoftwareSerial mySerial(2, 3);
+
 
 void setup() {
-  Serial.begin(9600);
-  mySerial.begin(9600);
+  Serial.begin(115200);
+  mySerial.begin(115200);
 
-  delay(1000);
 }
 
 
 void loop() {
 
-  delay(1000);
-
-  mySerial.println("ATI\r\n");
+  mySerial.println("AT\r\n");
   delay(100);
-
   ShowSerialData();
-    
+  delay(3000);
+
 }
 
 void ShowSerialData()
@@ -25,3 +23,4 @@ void ShowSerialData()
   while (mySerial.available() != 0)
     Serial.write(mySerial.read());
 }
+
