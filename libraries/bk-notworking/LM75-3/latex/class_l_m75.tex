@@ -1,0 +1,621 @@
+\hypertarget{class_l_m75}{\section{L\-M75 Class Reference}
+\label{class_l_m75}\index{L\-M75@{L\-M75}}
+}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_l_m75_a2a7ea6f324fe6d70e90dd76bac1d2f2d}{temp\-Unit\-\_\-t} \{ \hyperlink{class_l_m75_a2a7ea6f324fe6d70e90dd76bac1d2f2da547e55f7743275a163e43576c120477b}{L\-M75\-\_\-\-T\-K}, 
+\hyperlink{class_l_m75_a2a7ea6f324fe6d70e90dd76bac1d2f2dac93d25e3d1bca073b3fb6c725de49ea1}{L\-M75\-\_\-\-T\-C}, 
+\hyperlink{class_l_m75_a2a7ea6f324fe6d70e90dd76bac1d2f2da41c080b0ce5607f1767060ac24e4c522}{L\-M75\-\_\-\-T\-F}
+ \}
+\item 
+enum \hyperlink{class_l_m75_ac49994df7bcf8aeda551af5b80559402}{set\-Point\-Type} \{ \hyperlink{class_l_m75_ac49994df7bcf8aeda551af5b80559402a230e9a69afffee2738e3364daff2c838}{S\-P\-T\-\_\-\-O\-V\-E\-R\-T\-E\-M\-P}, 
+\hyperlink{class_l_m75_ac49994df7bcf8aeda551af5b80559402a0f0b37dce684d29af5fd1fbf7a78baa2}{S\-P\-T\-\_\-\-H\-Y\-S\-T\-E\-R\-E\-S\-I\-S}
+ \}
+\item 
+enum \hyperlink{class_l_m75_a199325ea8f9a90a2150587371682fc44}{output\-Polarity} \{ \hyperlink{class_l_m75_a199325ea8f9a90a2150587371682fc44a6ab923b2ccbda503412114744a377cdc}{P\-O\-L\-\_\-\-L\-O\-W}, 
+\hyperlink{class_l_m75_a199325ea8f9a90a2150587371682fc44a533db76668e7eaf3e7f50708f2e9ce43}{P\-O\-L\-\_\-\-H\-I\-G\-H}
+ \}
+\item 
+enum \hyperlink{class_l_m75_a32d79ab5e1a4b80d9a52cb9d62b590e5}{output\-Mode} \{ \hyperlink{class_l_m75_a32d79ab5e1a4b80d9a52cb9d62b590e5a9fadb52968bde2b7e910a9453738f0a7}{M\-O\-D\-E\-\_\-\-C\-O\-M\-P}, 
+\hyperlink{class_l_m75_a32d79ab5e1a4b80d9a52cb9d62b590e5ac4e4b9f082ff7a02bbee67a3f57a0b48}{M\-O\-D\-E\-\_\-\-I\-N\-T}
+ \}
+\item 
+enum \hyperlink{class_l_m75_a6194e0c26b8fc717dade26a62070e976}{op\-Mode} \{ \hyperlink{class_l_m75_a6194e0c26b8fc717dade26a62070e976a6ea0dc0ebe95666ba6d122fa88bb9cf8}{O\-P\-M\-\_\-\-N\-O\-R\-M\-A\-L}, 
+\hyperlink{class_l_m75_a6194e0c26b8fc717dade26a62070e976ab7194696d2b5b653f00d902c3b7c46b8}{O\-P\-M\-\_\-\-S\-H\-D\-N}
+ \}
+\item 
+enum \hyperlink{class_l_m75_adc17def542ebe019d6ef064bdcb37f10}{fault\-Queue} \{ \hyperlink{class_l_m75_adc17def542ebe019d6ef064bdcb37f10ab097f0541ef6ffca709899a977e4d0ab}{F\-Q\-\_\-1} = 1, 
+\hyperlink{class_l_m75_adc17def542ebe019d6ef064bdcb37f10a6f1c5562402075a0adf5cd4fe4f73e41}{F\-Q\-\_\-2} = 2, 
+\hyperlink{class_l_m75_adc17def542ebe019d6ef064bdcb37f10a441964c9648220f4d1201a918ee3a57d}{F\-Q\-\_\-4} = 4, 
+\hyperlink{class_l_m75_adc17def542ebe019d6ef064bdcb37f10a65995a2615014d4805da07bdd2a70772}{F\-Q\-\_\-6} = 6
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_l_m75_a2fd78a5cbd54b7e9906231a401fb1dfc}{L\-M75} (uint8\-\_\-t=\hyperlink{_l_m75_8h_ac48c7709cb57abee0e65802e2e34ed0a}{L\-M75\-\_\-\-I2\-C\-D\-E\-F\-A\-U\-L\-T\-A\-D\-D\-R})
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_l_m75}{L\-M75} Device class constructor. \end{DoxyCompactList}\item 
+\hypertarget{class_l_m75_a7efa68c775573baab4bda3bc4d498be6}{boolean \hyperlink{class_l_m75_a7efa68c775573baab4bda3bc4d498be6}{begin} ()}\label{class_l_m75_a7efa68c775573baab4bda3bc4d498be6}
+
+\begin{DoxyCompactList}\small\item\em Initialize the device and the i2c interface. \end{DoxyCompactList}\item 
+\hypertarget{class_l_m75_af86db7f91e48b9bc7a08eb5b9310144c}{boolean {\bfseries is\-Ready} (void)}\label{class_l_m75_af86db7f91e48b9bc7a08eb5b9310144c}
+
+\item 
+double \hyperlink{class_l_m75_ae400ef90dd61fe676d10665a53e1e251}{read\-Temp} (\hyperlink{class_l_m75_a2a7ea6f324fe6d70e90dd76bac1d2f2d}{temp\-Unit\-\_\-t}=\hyperlink{class_l_m75_a2a7ea6f324fe6d70e90dd76bac1d2f2dac93d25e3d1bca073b3fb6c725de49ea1}{L\-M75\-\_\-\-T\-C})
+\begin{DoxyCompactList}\small\item\em Return the measured temperature in specified units. \end{DoxyCompactList}\item 
+double \hyperlink{class_l_m75_a64592e43e41d99ad216e3e25498d2603}{read\-Set\-Point} (\hyperlink{class_l_m75_a2a7ea6f324fe6d70e90dd76bac1d2f2d}{temp\-Unit\-\_\-t}=\hyperlink{class_l_m75_a2a7ea6f324fe6d70e90dd76bac1d2f2dac93d25e3d1bca073b3fb6c725de49ea1}{L\-M75\-\_\-\-T\-C}, \hyperlink{class_l_m75_ac49994df7bcf8aeda551af5b80559402}{set\-Point\-Type}=\hyperlink{class_l_m75_ac49994df7bcf8aeda551af5b80559402a230e9a69afffee2738e3364daff2c838}{S\-P\-T\-\_\-\-O\-V\-E\-R\-T\-E\-M\-P})
+\begin{DoxyCompactList}\small\item\em Return the specified setpoint in specified units. \end{DoxyCompactList}\item 
+void \hyperlink{class_l_m75_a06a3ac4dcab0a65183d34f7deea4291e}{write\-Set\-Point} (double, \hyperlink{class_l_m75_a2a7ea6f324fe6d70e90dd76bac1d2f2d}{temp\-Unit\-\_\-t}=\hyperlink{class_l_m75_a2a7ea6f324fe6d70e90dd76bac1d2f2dac93d25e3d1bca073b3fb6c725de49ea1}{L\-M75\-\_\-\-T\-C}, \hyperlink{class_l_m75_ac49994df7bcf8aeda551af5b80559402}{set\-Point\-Type}=\hyperlink{class_l_m75_ac49994df7bcf8aeda551af5b80559402a230e9a69afffee2738e3364daff2c838}{S\-P\-T\-\_\-\-O\-V\-E\-R\-T\-E\-M\-P})
+\begin{DoxyCompactList}\small\item\em Write the specified setpoint supplied in the specified units. \end{DoxyCompactList}\item 
+void \hyperlink{class_l_m75_a1aaf5ed1081a108e996228bcdc00a2d6}{set\-Output\-Polarity} (\hyperlink{class_l_m75_a199325ea8f9a90a2150587371682fc44}{output\-Polarity}=\hyperlink{class_l_m75_a199325ea8f9a90a2150587371682fc44a6ab923b2ccbda503412114744a377cdc}{P\-O\-L\-\_\-\-L\-O\-W})
+\begin{DoxyCompactList}\small\item\em Set the O\-S polarity. \end{DoxyCompactList}\item 
+void \hyperlink{class_l_m75_a39cbe2f4df2383e180e8529f62c6b060}{set\-Output\-Mode} (\hyperlink{class_l_m75_a32d79ab5e1a4b80d9a52cb9d62b590e5}{output\-Mode}=\hyperlink{class_l_m75_a32d79ab5e1a4b80d9a52cb9d62b590e5a9fadb52968bde2b7e910a9453738f0a7}{M\-O\-D\-E\-\_\-\-C\-O\-M\-P})
+\begin{DoxyCompactList}\small\item\em Set the O\-S operation mode. \end{DoxyCompactList}\item 
+void \hyperlink{class_l_m75_ab80973db8f5e692fde8f31ad07730bdd}{set\-Operation\-Mode} (\hyperlink{class_l_m75_a6194e0c26b8fc717dade26a62070e976}{op\-Mode}=\hyperlink{class_l_m75_a32d79ab5e1a4b80d9a52cb9d62b590e5a9fadb52968bde2b7e910a9453738f0a7}{M\-O\-D\-E\-\_\-\-C\-O\-M\-P})
+\begin{DoxyCompactList}\small\item\em Set the device operation mode. \end{DoxyCompactList}\item 
+void \hyperlink{class_l_m75_a7ef89d16df90b16213b06b982bbfe429}{set\-Fault\-Queue} (\hyperlink{class_l_m75_adc17def542ebe019d6ef064bdcb37f10}{fault\-Queue})
+\begin{DoxyCompactList}\small\item\em Set the value of the O\-S fault queue. \end{DoxyCompactList}\item 
+double \hyperlink{class_l_m75_a25d48da08bf14dc858be423aa6862e67}{conv\-Cto\-K} (double deg\-C)
+\begin{DoxyCompactList}\small\item\em Convert temperature in degrees C to degrees K. \end{DoxyCompactList}\item 
+double \hyperlink{class_l_m75_a074cc687ec77ca65a266c612b9411687}{conv\-Cto\-F} (double deg\-C)
+\begin{DoxyCompactList}\small\item\em Convert temperature in degrees C to degrees F. \end{DoxyCompactList}\item 
+double \hyperlink{class_l_m75_a01f19d9d8652641a2448021a5d09ecab}{conv\-Kto\-C} (double deg\-K)
+\begin{DoxyCompactList}\small\item\em Convert temperature in degrees K to degrees C. \end{DoxyCompactList}\item 
+double \hyperlink{class_l_m75_ac7c608e0e2edf521c14872e3e01ed449}{conv\-Fto\-C} (double deg\-F)
+\begin{DoxyCompactList}\small\item\em Convert temperature in degrees F to degrees C. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Property$<$ uint8\-\_\-t, \hyperlink{class_l_m75}{L\-M75} $>$ \hyperlink{class_l_m75_a9f8dee59ac46f1c9740160402895dd5c}{bus\-Addr}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint8\-\_\-t \hyperlink{class_l_m75_a9215f53f9ba2e7daa70ae06e7aa1f09c}{get\-Addr} (void)
+\begin{DoxyCompactList}\small\item\em Return the device I2\-C Bus address. \end{DoxyCompactList}\item 
+uint8\-\_\-t \hyperlink{class_l_m75_a6f4b5e329a3a5cba53f264fb3969e49b}{read8} (uint8\-\_\-t)
+\begin{DoxyCompactList}\small\item\em Return an 8 bit register value from the device. \end{DoxyCompactList}\item 
+uint16\-\_\-t \hyperlink{class_l_m75_ae28f5277c854beb262ab65ac7185b039}{read16} (uint8\-\_\-t)
+\begin{DoxyCompactList}\small\item\em Return a 16 bit register value from the device. \end{DoxyCompactList}\item 
+void \hyperlink{class_l_m75_a5ab4d982bd8371bff5a33b4e486a0edc}{write8} (uint8\-\_\-t, uint8\-\_\-t)
+\begin{DoxyCompactList}\small\item\em Write a value to an 8 bit register in the device. \end{DoxyCompactList}\item 
+void \hyperlink{class_l_m75_af3656fcf51812e2f4bfc93c1c01e99ef}{write16} (uint8\-\_\-t, uint16\-\_\-t)
+\begin{DoxyCompactList}\small\item\em Write a value to a 16 bit register in the device. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_l_m75_a780e6eb930df3df71e23e44a5478fa1d}{boolean {\bfseries \-\_\-ready}}\label{class_l_m75_a780e6eb930df3df71e23e44a5478fa1d}
+
+\item 
+uint8\-\_\-t \hyperlink{class_l_m75_af76eee39ca511e2284988542f2fab1db}{\-\_\-addr}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 79 of file L\-M75.\-h.
+
+
+
+\subsection{Member Enumeration Documentation}
+\hypertarget{class_l_m75_adc17def542ebe019d6ef064bdcb37f10}{\index{L\-M75@{L\-M75}!fault\-Queue@{fault\-Queue}}
+\index{fault\-Queue@{fault\-Queue}!LM75@{L\-M75}}
+\subsubsection[{fault\-Queue}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf L\-M75\-::fault\-Queue}}}\label{class_l_m75_adc17def542ebe019d6ef064bdcb37f10}
+Enumerations for fault queue length. \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{F\-Q\-\_\-1@{F\-Q\-\_\-1}!L\-M75@{L\-M75}}\index{L\-M75@{L\-M75}!F\-Q\-\_\-1@{F\-Q\-\_\-1}}\item[{\em 
+\hypertarget{class_l_m75_adc17def542ebe019d6ef064bdcb37f10ab097f0541ef6ffca709899a977e4d0ab}{F\-Q\-\_\-1}\label{class_l_m75_adc17def542ebe019d6ef064bdcb37f10ab097f0541ef6ffca709899a977e4d0ab}
+}]fault queue value = 1 \index{F\-Q\-\_\-2@{F\-Q\-\_\-2}!L\-M75@{L\-M75}}\index{L\-M75@{L\-M75}!F\-Q\-\_\-2@{F\-Q\-\_\-2}}\item[{\em 
+\hypertarget{class_l_m75_adc17def542ebe019d6ef064bdcb37f10a6f1c5562402075a0adf5cd4fe4f73e41}{F\-Q\-\_\-2}\label{class_l_m75_adc17def542ebe019d6ef064bdcb37f10a6f1c5562402075a0adf5cd4fe4f73e41}
+}]fault queue value = 2 \index{F\-Q\-\_\-4@{F\-Q\-\_\-4}!L\-M75@{L\-M75}}\index{L\-M75@{L\-M75}!F\-Q\-\_\-4@{F\-Q\-\_\-4}}\item[{\em 
+\hypertarget{class_l_m75_adc17def542ebe019d6ef064bdcb37f10a441964c9648220f4d1201a918ee3a57d}{F\-Q\-\_\-4}\label{class_l_m75_adc17def542ebe019d6ef064bdcb37f10a441964c9648220f4d1201a918ee3a57d}
+}]fault queue value = 4 \index{F\-Q\-\_\-6@{F\-Q\-\_\-6}!L\-M75@{L\-M75}}\index{L\-M75@{L\-M75}!F\-Q\-\_\-6@{F\-Q\-\_\-6}}\item[{\em 
+\hypertarget{class_l_m75_adc17def542ebe019d6ef064bdcb37f10a65995a2615014d4805da07bdd2a70772}{F\-Q\-\_\-6}\label{class_l_m75_adc17def542ebe019d6ef064bdcb37f10a65995a2615014d4805da07bdd2a70772}
+}]fault queue value = 6 \end{description}
+\end{Desc}
+
+
+Definition at line 109 of file L\-M75.\-h.
+
+\hypertarget{class_l_m75_a6194e0c26b8fc717dade26a62070e976}{\index{L\-M75@{L\-M75}!op\-Mode@{op\-Mode}}
+\index{op\-Mode@{op\-Mode}!LM75@{L\-M75}}
+\subsubsection[{op\-Mode}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf L\-M75\-::op\-Mode}}}\label{class_l_m75_a6194e0c26b8fc717dade26a62070e976}
+Enumerations for operating mode. \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{O\-P\-M\-\_\-\-N\-O\-R\-M\-A\-L@{O\-P\-M\-\_\-\-N\-O\-R\-M\-A\-L}!L\-M75@{L\-M75}}\index{L\-M75@{L\-M75}!O\-P\-M\-\_\-\-N\-O\-R\-M\-A\-L@{O\-P\-M\-\_\-\-N\-O\-R\-M\-A\-L}}\item[{\em 
+\hypertarget{class_l_m75_a6194e0c26b8fc717dade26a62070e976a6ea0dc0ebe95666ba6d122fa88bb9cf8}{O\-P\-M\-\_\-\-N\-O\-R\-M\-A\-L}\label{class_l_m75_a6194e0c26b8fc717dade26a62070e976a6ea0dc0ebe95666ba6d122fa88bb9cf8}
+}]normal operation mode \index{O\-P\-M\-\_\-\-S\-H\-D\-N@{O\-P\-M\-\_\-\-S\-H\-D\-N}!L\-M75@{L\-M75}}\index{L\-M75@{L\-M75}!O\-P\-M\-\_\-\-S\-H\-D\-N@{O\-P\-M\-\_\-\-S\-H\-D\-N}}\item[{\em 
+\hypertarget{class_l_m75_a6194e0c26b8fc717dade26a62070e976ab7194696d2b5b653f00d902c3b7c46b8}{O\-P\-M\-\_\-\-S\-H\-D\-N}\label{class_l_m75_a6194e0c26b8fc717dade26a62070e976ab7194696d2b5b653f00d902c3b7c46b8}
+}]shutdown mode \end{description}
+\end{Desc}
+
+
+Definition at line 105 of file L\-M75.\-h.
+
+\hypertarget{class_l_m75_a32d79ab5e1a4b80d9a52cb9d62b590e5}{\index{L\-M75@{L\-M75}!output\-Mode@{output\-Mode}}
+\index{output\-Mode@{output\-Mode}!LM75@{L\-M75}}
+\subsubsection[{output\-Mode}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf L\-M75\-::output\-Mode}}}\label{class_l_m75_a32d79ab5e1a4b80d9a52cb9d62b590e5}
+Enumerations for output mode. \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{M\-O\-D\-E\-\_\-\-C\-O\-M\-P@{M\-O\-D\-E\-\_\-\-C\-O\-M\-P}!L\-M75@{L\-M75}}\index{L\-M75@{L\-M75}!M\-O\-D\-E\-\_\-\-C\-O\-M\-P@{M\-O\-D\-E\-\_\-\-C\-O\-M\-P}}\item[{\em 
+\hypertarget{class_l_m75_a32d79ab5e1a4b80d9a52cb9d62b590e5a9fadb52968bde2b7e910a9453738f0a7}{M\-O\-D\-E\-\_\-\-C\-O\-M\-P}\label{class_l_m75_a32d79ab5e1a4b80d9a52cb9d62b590e5a9fadb52968bde2b7e910a9453738f0a7}
+}]O\-S comparator mode \index{M\-O\-D\-E\-\_\-\-I\-N\-T@{M\-O\-D\-E\-\_\-\-I\-N\-T}!L\-M75@{L\-M75}}\index{L\-M75@{L\-M75}!M\-O\-D\-E\-\_\-\-I\-N\-T@{M\-O\-D\-E\-\_\-\-I\-N\-T}}\item[{\em 
+\hypertarget{class_l_m75_a32d79ab5e1a4b80d9a52cb9d62b590e5ac4e4b9f082ff7a02bbee67a3f57a0b48}{M\-O\-D\-E\-\_\-\-I\-N\-T}\label{class_l_m75_a32d79ab5e1a4b80d9a52cb9d62b590e5ac4e4b9f082ff7a02bbee67a3f57a0b48}
+}]O\-S interrupt mode \end{description}
+\end{Desc}
+
+
+Definition at line 101 of file L\-M75.\-h.
+
+\hypertarget{class_l_m75_a199325ea8f9a90a2150587371682fc44}{\index{L\-M75@{L\-M75}!output\-Polarity@{output\-Polarity}}
+\index{output\-Polarity@{output\-Polarity}!LM75@{L\-M75}}
+\subsubsection[{output\-Polarity}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf L\-M75\-::output\-Polarity}}}\label{class_l_m75_a199325ea8f9a90a2150587371682fc44}
+Enumerations for output polarity. \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{P\-O\-L\-\_\-\-L\-O\-W@{P\-O\-L\-\_\-\-L\-O\-W}!L\-M75@{L\-M75}}\index{L\-M75@{L\-M75}!P\-O\-L\-\_\-\-L\-O\-W@{P\-O\-L\-\_\-\-L\-O\-W}}\item[{\em 
+\hypertarget{class_l_m75_a199325ea8f9a90a2150587371682fc44a6ab923b2ccbda503412114744a377cdc}{P\-O\-L\-\_\-\-L\-O\-W}\label{class_l_m75_a199325ea8f9a90a2150587371682fc44a6ab923b2ccbda503412114744a377cdc}
+}]O\-S output active low \index{P\-O\-L\-\_\-\-H\-I\-G\-H@{P\-O\-L\-\_\-\-H\-I\-G\-H}!L\-M75@{L\-M75}}\index{L\-M75@{L\-M75}!P\-O\-L\-\_\-\-H\-I\-G\-H@{P\-O\-L\-\_\-\-H\-I\-G\-H}}\item[{\em 
+\hypertarget{class_l_m75_a199325ea8f9a90a2150587371682fc44a533db76668e7eaf3e7f50708f2e9ce43}{P\-O\-L\-\_\-\-H\-I\-G\-H}\label{class_l_m75_a199325ea8f9a90a2150587371682fc44a533db76668e7eaf3e7f50708f2e9ce43}
+}]O\-S output active high \end{description}
+\end{Desc}
+
+
+Definition at line 97 of file L\-M75.\-h.
+
+\hypertarget{class_l_m75_ac49994df7bcf8aeda551af5b80559402}{\index{L\-M75@{L\-M75}!set\-Point\-Type@{set\-Point\-Type}}
+\index{set\-Point\-Type@{set\-Point\-Type}!LM75@{L\-M75}}
+\subsubsection[{set\-Point\-Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf L\-M75\-::set\-Point\-Type}}}\label{class_l_m75_ac49994df7bcf8aeda551af5b80559402}
+Enumerations for setpoint registers. \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{S\-P\-T\-\_\-\-O\-V\-E\-R\-T\-E\-M\-P@{S\-P\-T\-\_\-\-O\-V\-E\-R\-T\-E\-M\-P}!L\-M75@{L\-M75}}\index{L\-M75@{L\-M75}!S\-P\-T\-\_\-\-O\-V\-E\-R\-T\-E\-M\-P@{S\-P\-T\-\_\-\-O\-V\-E\-R\-T\-E\-M\-P}}\item[{\em 
+\hypertarget{class_l_m75_ac49994df7bcf8aeda551af5b80559402a230e9a69afffee2738e3364daff2c838}{S\-P\-T\-\_\-\-O\-V\-E\-R\-T\-E\-M\-P}\label{class_l_m75_ac49994df7bcf8aeda551af5b80559402a230e9a69afffee2738e3364daff2c838}
+}]overtemp shutdown register \index{S\-P\-T\-\_\-\-H\-Y\-S\-T\-E\-R\-E\-S\-I\-S@{S\-P\-T\-\_\-\-H\-Y\-S\-T\-E\-R\-E\-S\-I\-S}!L\-M75@{L\-M75}}\index{L\-M75@{L\-M75}!S\-P\-T\-\_\-\-H\-Y\-S\-T\-E\-R\-E\-S\-I\-S@{S\-P\-T\-\_\-\-H\-Y\-S\-T\-E\-R\-E\-S\-I\-S}}\item[{\em 
+\hypertarget{class_l_m75_ac49994df7bcf8aeda551af5b80559402a0f0b37dce684d29af5fd1fbf7a78baa2}{S\-P\-T\-\_\-\-H\-Y\-S\-T\-E\-R\-E\-S\-I\-S}\label{class_l_m75_ac49994df7bcf8aeda551af5b80559402a0f0b37dce684d29af5fd1fbf7a78baa2}
+}]hysteresis register \end{description}
+\end{Desc}
+
+
+Definition at line 93 of file L\-M75.\-h.
+
+\hypertarget{class_l_m75_a2a7ea6f324fe6d70e90dd76bac1d2f2d}{\index{L\-M75@{L\-M75}!temp\-Unit\-\_\-t@{temp\-Unit\-\_\-t}}
+\index{temp\-Unit\-\_\-t@{temp\-Unit\-\_\-t}!LM75@{L\-M75}}
+\subsubsection[{temp\-Unit\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf L\-M75\-::temp\-Unit\-\_\-t}}}\label{class_l_m75_a2a7ea6f324fe6d70e90dd76bac1d2f2d}
+Enumerations for temperature units. \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{L\-M75\-\_\-\-T\-K@{L\-M75\-\_\-\-T\-K}!L\-M75@{L\-M75}}\index{L\-M75@{L\-M75}!L\-M75\-\_\-\-T\-K@{L\-M75\-\_\-\-T\-K}}\item[{\em 
+\hypertarget{class_l_m75_a2a7ea6f324fe6d70e90dd76bac1d2f2da547e55f7743275a163e43576c120477b}{L\-M75\-\_\-\-T\-K}\label{class_l_m75_a2a7ea6f324fe6d70e90dd76bac1d2f2da547e55f7743275a163e43576c120477b}
+}]degrees Kelvin \index{L\-M75\-\_\-\-T\-C@{L\-M75\-\_\-\-T\-C}!L\-M75@{L\-M75}}\index{L\-M75@{L\-M75}!L\-M75\-\_\-\-T\-C@{L\-M75\-\_\-\-T\-C}}\item[{\em 
+\hypertarget{class_l_m75_a2a7ea6f324fe6d70e90dd76bac1d2f2dac93d25e3d1bca073b3fb6c725de49ea1}{L\-M75\-\_\-\-T\-C}\label{class_l_m75_a2a7ea6f324fe6d70e90dd76bac1d2f2dac93d25e3d1bca073b3fb6c725de49ea1}
+}]degrees Centigrade \index{L\-M75\-\_\-\-T\-F@{L\-M75\-\_\-\-T\-F}!L\-M75@{L\-M75}}\index{L\-M75@{L\-M75}!L\-M75\-\_\-\-T\-F@{L\-M75\-\_\-\-T\-F}}\item[{\em 
+\hypertarget{class_l_m75_a2a7ea6f324fe6d70e90dd76bac1d2f2da41c080b0ce5607f1767060ac24e4c522}{L\-M75\-\_\-\-T\-F}\label{class_l_m75_a2a7ea6f324fe6d70e90dd76bac1d2f2da41c080b0ce5607f1767060ac24e4c522}
+}]degrees Fahrenheit \end{description}
+\end{Desc}
+
+
+Definition at line 88 of file L\-M75.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_l_m75_a2fd78a5cbd54b7e9906231a401fb1dfc}{\index{L\-M75@{L\-M75}!L\-M75@{L\-M75}}
+\index{L\-M75@{L\-M75}!LM75@{L\-M75}}
+\subsubsection[{L\-M75}]{\setlength{\rightskip}{0pt plus 5cm}L\-M75\-::\-L\-M75 (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{i2caddr = {\ttfamily {\bf L\-M75\-\_\-\-I2\-C\-D\-E\-F\-A\-U\-L\-T\-A\-D\-D\-R}}}
+\end{DoxyParamCaption}
+)}}\label{class_l_m75_a2fd78a5cbd54b7e9906231a401fb1dfc}
+
+
+\hyperlink{class_l_m75}{L\-M75} Device class constructor. 
+
+constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i2caddr} & Device address (default\-: published value). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 48 of file L\-M75.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_l_m75_a074cc687ec77ca65a266c612b9411687}{\index{L\-M75@{L\-M75}!conv\-Cto\-F@{conv\-Cto\-F}}
+\index{conv\-Cto\-F@{conv\-Cto\-F}!LM75@{L\-M75}}
+\subsubsection[{conv\-Cto\-F}]{\setlength{\rightskip}{0pt plus 5cm}double L\-M75\-::conv\-Cto\-F (
+\begin{DoxyParamCaption}
+\item[{double}]{deg\-C}
+\end{DoxyParamCaption}
+)}}\label{class_l_m75_a074cc687ec77ca65a266c612b9411687}
+
+
+Convert temperature in degrees C to degrees F. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em deg\-C} & Temperature in degrees Centigrade. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Temperature in degrees Fahrenheit. 
+\end{DoxyReturn}
+
+
+Definition at line 260 of file L\-M75.\-cpp.
+
+\hypertarget{class_l_m75_a25d48da08bf14dc858be423aa6862e67}{\index{L\-M75@{L\-M75}!conv\-Cto\-K@{conv\-Cto\-K}}
+\index{conv\-Cto\-K@{conv\-Cto\-K}!LM75@{L\-M75}}
+\subsubsection[{conv\-Cto\-K}]{\setlength{\rightskip}{0pt plus 5cm}double L\-M75\-::conv\-Cto\-K (
+\begin{DoxyParamCaption}
+\item[{double}]{deg\-C}
+\end{DoxyParamCaption}
+)}}\label{class_l_m75_a25d48da08bf14dc858be423aa6862e67}
+
+
+Convert temperature in degrees C to degrees K. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em deg\-C} & Temperature in degrees Centigrade. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Temperature in degrees Kelvin. 
+\end{DoxyReturn}
+
+
+Definition at line 253 of file L\-M75.\-cpp.
+
+\hypertarget{class_l_m75_ac7c608e0e2edf521c14872e3e01ed449}{\index{L\-M75@{L\-M75}!conv\-Fto\-C@{conv\-Fto\-C}}
+\index{conv\-Fto\-C@{conv\-Fto\-C}!LM75@{L\-M75}}
+\subsubsection[{conv\-Fto\-C}]{\setlength{\rightskip}{0pt plus 5cm}double L\-M75\-::conv\-Fto\-C (
+\begin{DoxyParamCaption}
+\item[{double}]{deg\-F}
+\end{DoxyParamCaption}
+)}}\label{class_l_m75_ac7c608e0e2edf521c14872e3e01ed449}
+
+
+Convert temperature in degrees F to degrees C. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em deg\-F} & Temperature in degrees Fahrenheit. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Temperature in degrees Centigrade. 
+\end{DoxyReturn}
+
+
+Definition at line 274 of file L\-M75.\-cpp.
+
+\hypertarget{class_l_m75_a01f19d9d8652641a2448021a5d09ecab}{\index{L\-M75@{L\-M75}!conv\-Kto\-C@{conv\-Kto\-C}}
+\index{conv\-Kto\-C@{conv\-Kto\-C}!LM75@{L\-M75}}
+\subsubsection[{conv\-Kto\-C}]{\setlength{\rightskip}{0pt plus 5cm}double L\-M75\-::conv\-Kto\-C (
+\begin{DoxyParamCaption}
+\item[{double}]{deg\-K}
+\end{DoxyParamCaption}
+)}}\label{class_l_m75_a01f19d9d8652641a2448021a5d09ecab}
+
+
+Convert temperature in degrees K to degrees C. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em deg\-K} & Temperature in degrees Kelvin. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Temperature in degrees Centigrade. 
+\end{DoxyReturn}
+
+
+Definition at line 267 of file L\-M75.\-cpp.
+
+\hypertarget{class_l_m75_a9215f53f9ba2e7daa70ae06e7aa1f09c}{\index{L\-M75@{L\-M75}!get\-Addr@{get\-Addr}}
+\index{get\-Addr@{get\-Addr}!LM75@{L\-M75}}
+\subsubsection[{get\-Addr}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t L\-M75\-::get\-Addr (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_l_m75_a9215f53f9ba2e7daa70ae06e7aa1f09c}
+
+
+Return the device I2\-C Bus address. 
+
+\begin{DoxyReturn}{Returns}
+Device address. 
+\end{DoxyReturn}
+
+
+Definition at line 171 of file L\-M75.\-cpp.
+
+\hypertarget{class_l_m75_ae28f5277c854beb262ab65ac7185b039}{\index{L\-M75@{L\-M75}!read16@{read16}}
+\index{read16@{read16}!LM75@{L\-M75}}
+\subsubsection[{read16}]{\setlength{\rightskip}{0pt plus 5cm}uint16\-\_\-t L\-M75\-::read16 (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{reg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_l_m75_ae28f5277c854beb262ab65ac7185b039}
+
+
+Return a 16 bit register value from the device. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em reg} & 16b Register to read from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Value read from register. 
+\end{DoxyReturn}
+
+
+Definition at line 197 of file L\-M75.\-cpp.
+
+\hypertarget{class_l_m75_a6f4b5e329a3a5cba53f264fb3969e49b}{\index{L\-M75@{L\-M75}!read8@{read8}}
+\index{read8@{read8}!LM75@{L\-M75}}
+\subsubsection[{read8}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t L\-M75\-::read8 (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{reg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_l_m75_a6f4b5e329a3a5cba53f264fb3969e49b}
+
+
+Return an 8 bit register value from the device. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em reg} & 8b Register to read from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Value read from register. 
+\end{DoxyReturn}
+
+
+Definition at line 178 of file L\-M75.\-cpp.
+
+\hypertarget{class_l_m75_a64592e43e41d99ad216e3e25498d2603}{\index{L\-M75@{L\-M75}!read\-Set\-Point@{read\-Set\-Point}}
+\index{read\-Set\-Point@{read\-Set\-Point}!LM75@{L\-M75}}
+\subsubsection[{read\-Set\-Point}]{\setlength{\rightskip}{0pt plus 5cm}double L\-M75\-::read\-Set\-Point (
+\begin{DoxyParamCaption}
+\item[{{\bf temp\-Unit\-\_\-t}}]{tunit = {\ttfamily {\bf L\-M75\-\_\-\-T\-C}}, }
+\item[{{\bf set\-Point\-Type}}]{spt = {\ttfamily {\bf S\-P\-T\-\_\-\-O\-V\-E\-R\-T\-E\-M\-P}}}
+\end{DoxyParamCaption}
+)}}\label{class_l_m75_a64592e43e41d99ad216e3e25498d2603}
+
+
+Return the specified setpoint in specified units. 
+
+\begin{DoxyRemark}{Remarks}
+Setpoint is returned as a 2's complement value in the most significant 9 bits of a 16 bit field expressed in degrees C to a resolution of 0.\-125\-C. 
+\end{DoxyRemark}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em tunit} & Temperature units to convert raw data to. \\
+\hline
+\mbox{\tt in}  & {\em spt} & Setpoint type (overtemp or hysteresis) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Temperature. 
+\end{DoxyReturn}
+
+
+Definition at line 91 of file L\-M75.\-cpp.
+
+\hypertarget{class_l_m75_ae400ef90dd61fe676d10665a53e1e251}{\index{L\-M75@{L\-M75}!read\-Temp@{read\-Temp}}
+\index{read\-Temp@{read\-Temp}!LM75@{L\-M75}}
+\subsubsection[{read\-Temp}]{\setlength{\rightskip}{0pt plus 5cm}double L\-M75\-::read\-Temp (
+\begin{DoxyParamCaption}
+\item[{{\bf temp\-Unit\-\_\-t}}]{tunit = {\ttfamily {\bf L\-M75\-\_\-\-T\-C}}}
+\end{DoxyParamCaption}
+)}}\label{class_l_m75_ae400ef90dd61fe676d10665a53e1e251}
+
+
+Return the measured temperature in specified units. 
+
+\begin{DoxyRemark}{Remarks}
+Temperature is returned as a 2's complement value in the most significant 11 bits of a 16 bit field expressed in degrees C to a resolution of 0.\-125\-C. 
+\end{DoxyRemark}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em tunit} & Temperature units to convert raw data to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Temperature. 
+\end{DoxyReturn}
+
+
+Definition at line 72 of file L\-M75.\-cpp.
+
+\hypertarget{class_l_m75_a7ef89d16df90b16213b06b982bbfe429}{\index{L\-M75@{L\-M75}!set\-Fault\-Queue@{set\-Fault\-Queue}}
+\index{set\-Fault\-Queue@{set\-Fault\-Queue}!LM75@{L\-M75}}
+\subsubsection[{set\-Fault\-Queue}]{\setlength{\rightskip}{0pt plus 5cm}void L\-M75\-::set\-Fault\-Queue (
+\begin{DoxyParamCaption}
+\item[{{\bf fault\-Queue}}]{fqueue}
+\end{DoxyParamCaption}
+)}}\label{class_l_m75_a7ef89d16df90b16213b06b982bbfe429}
+
+
+Set the value of the O\-S fault queue. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em fqueue} & Enumerated O\-S fault queue programming value. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 155 of file L\-M75.\-cpp.
+
+\hypertarget{class_l_m75_ab80973db8f5e692fde8f31ad07730bdd}{\index{L\-M75@{L\-M75}!set\-Operation\-Mode@{set\-Operation\-Mode}}
+\index{set\-Operation\-Mode@{set\-Operation\-Mode}!LM75@{L\-M75}}
+\subsubsection[{set\-Operation\-Mode}]{\setlength{\rightskip}{0pt plus 5cm}void L\-M75\-::set\-Operation\-Mode (
+\begin{DoxyParamCaption}
+\item[{{\bf op\-Mode}}]{mode = {\ttfamily {\bf M\-O\-D\-E\-\_\-\-C\-O\-M\-P}}}
+\end{DoxyParamCaption}
+)}}\label{class_l_m75_ab80973db8f5e692fde8f31ad07730bdd}
+
+
+Set the device operation mode. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mode} & Enumerated operation mode. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 145 of file L\-M75.\-cpp.
+
+\hypertarget{class_l_m75_a39cbe2f4df2383e180e8529f62c6b060}{\index{L\-M75@{L\-M75}!set\-Output\-Mode@{set\-Output\-Mode}}
+\index{set\-Output\-Mode@{set\-Output\-Mode}!LM75@{L\-M75}}
+\subsubsection[{set\-Output\-Mode}]{\setlength{\rightskip}{0pt plus 5cm}void L\-M75\-::set\-Output\-Mode (
+\begin{DoxyParamCaption}
+\item[{{\bf output\-Mode}}]{mode = {\ttfamily {\bf M\-O\-D\-E\-\_\-\-C\-O\-M\-P}}}
+\end{DoxyParamCaption}
+)}}\label{class_l_m75_a39cbe2f4df2383e180e8529f62c6b060}
+
+
+Set the O\-S operation mode. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mode} & Enumerated O\-S operation mode. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 135 of file L\-M75.\-cpp.
+
+\hypertarget{class_l_m75_a1aaf5ed1081a108e996228bcdc00a2d6}{\index{L\-M75@{L\-M75}!set\-Output\-Polarity@{set\-Output\-Polarity}}
+\index{set\-Output\-Polarity@{set\-Output\-Polarity}!LM75@{L\-M75}}
+\subsubsection[{set\-Output\-Polarity}]{\setlength{\rightskip}{0pt plus 5cm}void L\-M75\-::set\-Output\-Polarity (
+\begin{DoxyParamCaption}
+\item[{{\bf output\-Polarity}}]{pol = {\ttfamily {\bf P\-O\-L\-\_\-\-L\-O\-W}}}
+\end{DoxyParamCaption}
+)}}\label{class_l_m75_a1aaf5ed1081a108e996228bcdc00a2d6}
+
+
+Set the O\-S polarity. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em pol} & Enumerated O\-S polarity selection. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 125 of file L\-M75.\-cpp.
+
+\hypertarget{class_l_m75_af3656fcf51812e2f4bfc93c1c01e99ef}{\index{L\-M75@{L\-M75}!write16@{write16}}
+\index{write16@{write16}!LM75@{L\-M75}}
+\subsubsection[{write16}]{\setlength{\rightskip}{0pt plus 5cm}void L\-M75\-::write16 (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{reg, }
+\item[{uint16\-\_\-t}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_l_m75_af3656fcf51812e2f4bfc93c1c01e99ef}
+
+
+Write a value to a 16 bit register in the device. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em reg} & Register to write to. \\
+\hline
+\mbox{\tt in}  & {\em data} & Value to write. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 236 of file L\-M75.\-cpp.
+
+\hypertarget{class_l_m75_a5ab4d982bd8371bff5a33b4e486a0edc}{\index{L\-M75@{L\-M75}!write8@{write8}}
+\index{write8@{write8}!LM75@{L\-M75}}
+\subsubsection[{write8}]{\setlength{\rightskip}{0pt plus 5cm}void L\-M75\-::write8 (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{reg, }
+\item[{uint8\-\_\-t}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_l_m75_a5ab4d982bd8371bff5a33b4e486a0edc}
+
+
+Write a value to an 8 bit register in the device. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em reg} & Register to write to. \\
+\hline
+\mbox{\tt in}  & {\em data} & Value to write. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 220 of file L\-M75.\-cpp.
+
+\hypertarget{class_l_m75_a06a3ac4dcab0a65183d34f7deea4291e}{\index{L\-M75@{L\-M75}!write\-Set\-Point@{write\-Set\-Point}}
+\index{write\-Set\-Point@{write\-Set\-Point}!LM75@{L\-M75}}
+\subsubsection[{write\-Set\-Point}]{\setlength{\rightskip}{0pt plus 5cm}void L\-M75\-::write\-Set\-Point (
+\begin{DoxyParamCaption}
+\item[{double}]{val, }
+\item[{{\bf temp\-Unit\-\_\-t}}]{tunit = {\ttfamily {\bf L\-M75\-\_\-\-T\-C}}, }
+\item[{{\bf set\-Point\-Type}}]{spt = {\ttfamily {\bf S\-P\-T\-\_\-\-O\-V\-E\-R\-T\-E\-M\-P}}}
+\end{DoxyParamCaption}
+)}}\label{class_l_m75_a06a3ac4dcab0a65183d34f7deea4291e}
+
+
+Write the specified setpoint supplied in the specified units. 
+
+\begin{DoxyRemark}{Remarks}
+Setpoint is written as a 2's complement value in the most significant 9 bits of a 16 bit field expressed in degrees C to a resolution of 0.\-125\-C. 
+\end{DoxyRemark}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em val} & Setpoint temperature. \\
+\hline
+\mbox{\tt in}  & {\em tunit} & Temperature units of the setpoint. \\
+\hline
+\mbox{\tt in}  & {\em spt} & Setpoint type (overtemp or hysteresis) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 110 of file L\-M75.\-cpp.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_l_m75_af76eee39ca511e2284988542f2fab1db}{\index{L\-M75@{L\-M75}!\-\_\-addr@{\-\_\-addr}}
+\index{\-\_\-addr@{\-\_\-addr}!LM75@{L\-M75}}
+\subsubsection[{\-\_\-addr}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t L\-M75\-::\-\_\-addr\hspace{0.3cm}{\ttfamily [private]}}}\label{class_l_m75_af76eee39ca511e2284988542f2fab1db}
+Slave address 
+
+Definition at line 131 of file L\-M75.\-h.
+
+\hypertarget{class_l_m75_a9f8dee59ac46f1c9740160402895dd5c}{\index{L\-M75@{L\-M75}!bus\-Addr@{bus\-Addr}}
+\index{bus\-Addr@{bus\-Addr}!LM75@{L\-M75}}
+\subsubsection[{bus\-Addr}]{\setlength{\rightskip}{0pt plus 5cm}Property$<$uint8\-\_\-t, {\bf L\-M75}$>$ L\-M75\-::bus\-Addr}}\label{class_l_m75_a9f8dee59ac46f1c9740160402895dd5c}
+I2\-C Bus address property 
+
+Definition at line 85 of file L\-M75.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_l_m75_8h}{L\-M75.\-h}\item 
+\hyperlink{_l_m75_8cpp}{L\-M75.\-cpp}\end{DoxyCompactItemize}

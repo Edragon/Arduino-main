@@ -1,0 +1,68 @@
+#######################################
+# Syntax Coloring Map For LM75
+#######################################
+
+#######################################
+# Datatypes            (KEYWORD1)
+#######################################
+
+LM75_TK                 KEYWORD1
+LM75_TC                 KEYWORD1
+LM75_TF                 KEYWORD1
+SPT_OVERTEMP            KEYWORD1
+SPT_HYSTERESIS          KEYWORD1
+POL_LOW                 KEYWORD1
+POL_HIGH                KEYWORD1
+MODE_COMP               KEYWORD1
+MODE_INT                KEYWORD1
+OPM_NORMAL              KEYWORD1
+OPM_SHDN                KEYWORD1
+FQ_1 = 1                KEYWORD1
+FQ_2 = 2                KEYWORD1
+FQ_4 = 4                KEYWORD1
+FQ_6 = 6                KEYWORD1
+tempUnit_t              KEYWORD1
+setPointType            KEYWORD1
+outputPolarity          KEYWORD1
+outputMode              KEYWORD1
+opMode                  KEYWORD1
+faultQueue              KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin                   KEYWORD2
+readTemp                KEYWORD2
+readSetPoint            KEYWORD2
+writeSetPoint           KEYWORD2
+setOutputPolarity       KEYWORD2
+setOutputMode           KEYWORD2
+setOperationMode        KEYWORD2
+setFaultQueue           KEYWORD2
+convCtoK                KEYWORD2
+convCtoF                KEYWORD2
+convKtoC                KEYWORD2
+convFtoC                KEYWORD2
+
+#######################################
+# Constants            (LITERAL1)
+#######################################
+
+LM75_I2CDEFAULTADDR     LITERAL1
+LM75_BROADCASTADDR      LITERAL1
+LM75_CONF               LITERAL1
+LM75_TEMP               LITERAL1
+LM75_TOS                LITERAL1
+LM75_THYST              LITERAL1
+LM75_CONF_RES           LITERAL1
+LM75_CONF_OSFQUE_1      LITERAL1
+LM75_CONF_OSFQUE_2      LITERAL1
+LM75_CONF_OSFQUE_4      LITERAL1
+LM75_CONF_OSFQUE_6      LITERAL1
+LM75_CONF_OSPOL_AL      LITERAL1
+LM75_CONF_OSPOL_AH      LITERAL1
+LM75_CONF_OSOM_COMP     LITERAL1
+LM75_CONF_OSOM_INT      LITERAL1
+LM75_CONF_DOM_NORMAL    LITERAL1
+LM75_CONF_DOM_SHUTDOWN  LITERAL1
