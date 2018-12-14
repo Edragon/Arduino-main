@@ -1,0 +1,27 @@
+#######################################
+# Syntax Coloring Map For Keyboard
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+Ht1621	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+writeBits	KEYWORD2
+writeCmd	KEYWORD2
+init	KEYWORD2
+poll	KEYWORD2
+shutDown	KEYWORD2
+writeData	KEYWORD2
+setAll	KEYWORD2
+writeNumber	KEYWORD2
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
