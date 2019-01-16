@@ -1,0 +1,27 @@
+{
+  "name": "CryptoAuth",
+  "keywords": "crypto, cryptography, i2c, ATECC108, ATSHA204",
+  "description": "Device driver library for the Atmel ATSHA204 and ATECC108",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cryptotronix/cryptoauth-arduino.git"
+  },
+  "version": "0.1",
+  "license": "LGPL-3.0",
+  "authors": [{
+    "name": "Josh Datko",
+    "email": "jbd@cryptotronix.com",
+    "url": "https://github.com/jbdatko",
+    "maintainer": true
+  }],
+  "frameworks": [
+    "arduino"
+  ],
+  "platforms": [
+    "atmelavr"
+  ],
+  "examples": [
+    "examples/*.ino"
+  ]
+}
+
