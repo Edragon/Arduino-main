@@ -36,6 +36,7 @@ void loop()
     }
     Serial.println("");
     i = 0;
+    flag_print_card_num = 0;
   }
 
 }
