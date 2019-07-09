@@ -1,0 +1,38 @@
+#######################################
+# Syntax Coloring Map For HT1621
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+HT1621	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	KEYWORD2
+clear	KEYWORD2
+backlight	KEYWORD2
+noBacklight	KEYWORD2
+setBatteryLevel	KEYWORD2
+print	KEYWORD2
+display	KEYWORD2
+noDisplay	KEYWORD2
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+BIAS	LITERAL1
+SYSDIS	LITERAL1
+SYSEN	LITERAL1
+LCDOFF	LITERAL1
+LCDON	LITERAL1
+XTAL	LITERAL1
+RC256	LITERAL1
+TONEON	LITERAL1
+TONEOFF	LITERAL1
+WDTDIS1	LITERAL1
