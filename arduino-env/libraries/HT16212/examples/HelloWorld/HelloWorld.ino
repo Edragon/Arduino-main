@@ -29,7 +29,7 @@ void setup(){
 
 
 
-  lcd.begin(13, 12, 8, 10); // (cs, wr, Data, backlight)
+  lcd.begin(3, 2, 4, 10); // (cs, wr, Data, backlight)
   // if no backlight control is given, you can also use:
   // lcd.begin(13, 12, 8); // (cs, wr, Data)
 
