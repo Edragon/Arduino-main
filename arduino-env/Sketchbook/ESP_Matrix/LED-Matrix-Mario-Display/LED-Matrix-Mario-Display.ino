@@ -35,7 +35,7 @@ Ticker display_ticker;
 
 // PxMATRIX display(32,16,P_LAT, P_OE,P_A,P_B,P_C);
 // PxMATRIX display(64,32,P_LAT, P_OE,P_A,P_B,P_C,P_D);
-PxMATRIX display(64, 64, P_LAT, P_OE, P_A, P_B, P_C, P_D, P_E);
+PxMATRIX display(32, 32, P_LAT, P_OE, P_A, P_B, P_C, P_D, P_E);
 
 // Some standard colors
 uint16_t myRED = display.color565(255, 0, 0);
@@ -192,7 +192,8 @@ void display_updater()
 }
 void setup() {
   Serial.begin(9600);
-  display.begin(32);
+  display.begin(8);
+  display.setScanPattern(WZAGZIG);
   display.clearDisplay();
   
   Serial.print("Pixel draw latency in us: ");
