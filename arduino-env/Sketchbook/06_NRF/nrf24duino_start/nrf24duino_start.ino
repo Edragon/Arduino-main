@@ -17,7 +17,13 @@
 
 // Set up nRF24L01 radio on SPI bus plus pins 9 & 10 
 
-RF24 radio(7,10);
+// CE 7 CS 10
+
+//RF24 radio(7,10);
+
+// CE 9 CS 7
+// CE CS
+RF24 radio(9, 7);
 
 //
 // Topology
