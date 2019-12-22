@@ -13,7 +13,10 @@
 #define SERVER_ADDRESS 2
 
 // Singleton instance of the radio driver
+
+// for loraduino
 RH_RF95 driver(10, 2);
+
 //RH_RF95 driver(5, 2); // Rocket Scream Mini Ultra Pro with the RFM95W
 
 // Class to manage message delivery and receipt, using the driver declared above
@@ -102,4 +105,3 @@ void loop()
     Serial.println("sendtoWait failed");
   delay(1000);
 }
-
