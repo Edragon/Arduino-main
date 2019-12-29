@@ -20,7 +20,7 @@
 // NSS pin:   10
 // DIO1 pin:  2
 // BUSY pin:  9
-SX1262 lora = new Module(10, 2, 3, 8);
+SX1262 lora = new Module(10, 2, 8);
 
 // or using RadioShield
 // https://github.com/jgromes/RadioShield
