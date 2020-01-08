@@ -11,8 +11,8 @@
 
 #include <SPI.h>
 #include <RH_NRF24.h>
-#include <SoftwareSerial.h>
-SoftwareSerial mySerial(5, 6); // RX, TX
+//#include <SoftwareSerial.h>
+//SoftwareSerial mySerial(5, 6); // RX, TX
 
 // Singleton instance of the radio driver
 
@@ -26,15 +26,15 @@ void setup()
 {
   pinMode(3, OUTPUT);
   //Serial.begin(9600);
-  mySerial.begin(9600);
+  Serial.begin(9600);
 
   if (!nrf24.init())
-    mySerial.println("init failed");
+    Serial.println("init failed");
   // Defaults after init are 2.402 GHz (channel 2), 2Mbps, 0dBm
   if (!nrf24.setChannel(1))
-    mySerial.println("setChannel failed");
+    Serial.println("setChannel failed");
   if (!nrf24.setRF(RH_NRF24::DataRate2Mbps, RH_NRF24::TransmitPower0dBm))
-    mySerial.println("setRF failed");    
+    Serial.println("setRF failed");    
   //mySerial.println("init OK\r\n");  
    
 }
@@ -43,7 +43,7 @@ void setup()
 void loop()
 {
   digitalWrite(3, HIGH);  
-  mySerial.println("Sending to nrf24_server");
+  Serial.println("Sending to nrf24_server");
   // Send a message to nrf24_server
   uint8_t data[] = "Hello World!";
   nrf24.send(data, sizeof(data));
@@ -60,19 +60,19 @@ void loop()
     if (nrf24.recv(buf, &len))
     {
       digitalWrite(3, LOW);
-      mySerial.print("got reply: ");
-      mySerial.println((char*)buf);
+      Serial.print("got reply: ");
+      Serial.println((char*)buf);
     }
     else
     {
       digitalWrite(3, LOW);
-      mySerial.println("recv failed");
+      Serial.println("recv failed");
     }
   }
   else
   {
     digitalWrite(3, LOW);
-    mySerial.println("No reply, is nrf24_server running?");
+    Serial.println("No reply, is nrf24_server running?");
   }
   delay(400);
   
