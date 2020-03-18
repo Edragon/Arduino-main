@@ -1,7 +1,7 @@
 #include <SoftwareSerial.h>
 
 //SoftwareSerial mySerial(2, 3);
-SoftwareSerial mySerial(4, 5); // new
+SoftwareSerial mySerial(2, 3); // new
 
 void setup() {
   Serial.begin(115200);
@@ -13,7 +13,7 @@ void setup() {
 
 
 void loop() {
-
+  Serial.println("test START ...\r\n");
   mySerial.println("AT\r\n");
   delay(100);
   ShowSerialData();
