@@ -1,26 +1,29 @@
-
-
 #include <SoftwareSerial.h>
 
-#define SIM800_TX_PIN 2
-#define SIM800_RX_PIN 3
+
+#define SIM800_TX_PIN 4
+#define SIM800_RX_PIN 5
+#define relay_control 6
+#define GSM_boot 8
 
 //Create software serial object to communicate with SIM800
 SoftwareSerial serialSIM800(SIM800_TX_PIN, SIM800_RX_PIN);
 
 void relayTest() {
-  digitalWrite(5, HIGH);
-  digitalWrite(6, HIGH);
+  //digitalWrite(5, HIGH);
+  digitalWrite(relay_control, HIGH);
   delay(1000);
-  digitalWrite(5, LOW);
-  digitalWrite(6, LOW);
+  //digitalWrite(5, LOW);
+  digitalWrite(relay_control, LOW);
   delay(1000);
 }
 
 void GsmBoot() {
-  digitalWrite(5, HIGH);
+  digitalWrite(GSM_boot, HIGH);
   //delay(5000);
-  //digitalWrite(5, LOW);
+  //digitalWrite(GSM_boot, LOW);
+  //delay(5000);
+  //digitalWrite(GSM_boot, LOW);
 }
 
 void setup() {
@@ -31,12 +34,13 @@ void setup() {
   //Being serial communication witj Arduino and SIM800
   serialSIM800.begin(9600);
   delay(1000);
-
-  Serial.println("Setup Complete!");
-
-  pinMode(5, OUTPUT);
-  pinMode(6, OUTPUT);
+  
+  pinMode(GSM_boot, OUTPUT);
+  
+  relayTest();
   GsmBoot();
+  
+  Serial.println("Setup Complete!");
 }
 
 
