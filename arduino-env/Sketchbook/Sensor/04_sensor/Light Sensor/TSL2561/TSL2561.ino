@@ -1,7 +1,7 @@
 #include <Wire.h> //IIC
 #include <math.h>
 
-int BH1750address = 0x23;
+int BH1750address = 0x29;
 byte buff[2];
 
 void setup()

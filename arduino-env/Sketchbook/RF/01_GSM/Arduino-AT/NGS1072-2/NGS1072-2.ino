@@ -21,11 +21,20 @@ void GsmBoot() {
 }
 
 void GsmReboot() {
-  serialSIM800.println("AT+CPOWD=1"); // try command to turn off GSM module
+  serialSIM800.println("AT+CPOWD=1"); // try command to turn off GSM module by AT commands
+  digitalWrite(GSM_boot, LOW); // release high status
   delay(1000);
+  if ( serialSIM800.find("NORMAL") ) {
+    Serial.println("GSM is already active, now shutdown and reboot! ");
+  }
   digitalWrite(GSM_boot, HIGH); // restart
   delay(5000);
-  digitalWrite(GSM_boot, LOW);
+  digitalWrite(GSM_boot, LOW); // 
+  delay(3000);
+  serialSIM800.println("AT");
+  if ( serialSIM800.find("OK") ) {
+    Serial.println("GSM working!");
+    }
 }
 
 void setup() {
@@ -39,10 +48,10 @@ void setup() {
   
   pinMode(GSM_boot, OUTPUT);
   
-  relayTest();
+  //relayTest();
   GsmReboot();
   
-  Serial.println("Setup Complete!");
+  Serial.println("Setup Complete, try to send AT commands on serial monitor!");
 }
 
 
