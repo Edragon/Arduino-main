@@ -8,23 +8,23 @@ void setup() {
   // TX_Fm();//FM发送模式
 }
 void loop() {
-  RX_Fm(10710);// 中国国际广播
-  Serial.print("FMtx=");
-  Serial.print(Rda5820FreqGet());//FM频率
-  Serial.println(" ");
-  delay(30000);
-  
-  RX_Fm(9910);// 龙华电视台
-  Serial.print("FMtx=");
-  Serial.print(Rda5820FreqGet());//FM频率
-  Serial.println(" ");
-  delay(30000);
+//  RX_Fm(10710);// 中国国际广播
+//  Serial.print("FMtx=");
+//  Serial.print(Rda5820FreqGet());//FM频率
+//  Serial.println(" ");
+//  delay(10000);
+//  
+//  RX_Fm(9910);// 龙华电视台
+//  Serial.print("FMtx=");
+//  Serial.print(Rda5820FreqGet());//FM频率
+//  Serial.println(" ");
+//  delay(10000);
 
   RX_Fm(10430);// 宝安电视台
   Serial.print("FMtx=");
   Serial.print(Rda5820FreqGet());//FM频率
   Serial.println(" ");
-  delay(30000);
+  delay(100000);
 }
 
 void initRda5820()//FM初始化

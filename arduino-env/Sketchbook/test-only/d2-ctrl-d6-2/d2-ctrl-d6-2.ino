@@ -15,7 +15,7 @@ int relaypin = 6;
 // the setup routine runs once when you press reset:
 void setup() {
   // initialize serial communication at 9600 bits per second:
-  Serial.begin(9600);
+  Serial.begin(19200);
   
   // make the pushbutton's pin an input:
   pinMode(pushButton, INPUT);
