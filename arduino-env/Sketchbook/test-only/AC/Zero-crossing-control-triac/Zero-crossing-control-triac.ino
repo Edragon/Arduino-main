@@ -1,6 +1,10 @@
 const byte ZCP = 2;
-const unsigned int dim = 5000;  // 5000
+const unsigned int dim = 500;  // 5000
+
+unsigned long time;
 void setup() {
+  Serial.begin(9600);
+  
   pinMode(ZCP, INPUT);
 
   pinMode(4, OUTPUT);
@@ -11,10 +15,21 @@ void setup() {
 
 }
 void loop() {
-  if (digitalRead(ZCP) == LOW) {
-    Zero_Cross();
+  //time = millis();
+  if (time < 10000) {
+    Serial.println("time in 10 secs");
+    
+    if (digitalRead(ZCP) == HIGH) {
+      Zero_Cross();
+    }
+  }
+  else {
+  if (digitalRead(ZCP) == HIGH) {
+      Zero_Cross();
+    }
   }
 }
+
 
 void Zero_Cross() {
   digitalWrite(4, LOW);
