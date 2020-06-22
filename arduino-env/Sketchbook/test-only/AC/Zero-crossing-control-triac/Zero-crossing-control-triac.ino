@@ -1,5 +1,5 @@
 const byte ZCP = 2;
-const unsigned int dim = 500;  // 5000
+const unsigned int dim = 5000;  // 5000
 
 unsigned long time;
 void setup() {
