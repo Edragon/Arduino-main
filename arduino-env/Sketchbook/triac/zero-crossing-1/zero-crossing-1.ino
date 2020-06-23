@@ -1,6 +1,7 @@
 //source: http://electronics.stackexchange.com/q/59615
 
 int AC_LOAD = 3;    // Output to Opto Triac pin
+int AC_LOAD2 = 5;    // Output to Opto Triac pin
 int dimming = 128;  // Dimming level (0-128)  0 = ON, 128 = OFF
 
 void setup()
@@ -13,19 +14,29 @@ void zero_crosss_int()  // function to be fired at the zero crossing to dim the 
 {
   // Firing angle calculation :: 50Hz-> 10ms (1/2 Cycle)
   // (10000us - 10us) / 128 = 75 (Approx)
-  int dimtime = (75*dimming);      
+  int dimtime = (75 * dimming);    // 75 for 50hz china 65 for 60hz
   delayMicroseconds(dimtime);    // Off cycle
   digitalWrite(AC_LOAD, HIGH);   // triac firing
+  digitalWrite(AC_LOAD2, HIGH);   // triac firing
   delayMicroseconds(10);         // triac On propogation delay
   digitalWrite(AC_LOAD, LOW);    // triac Off
+  digitalWrite(AC_LOAD2, LOW);    // triac Off
 }
 
 void loop()
 {
-  dimming = 128; 
-  delay(100);
-  dimming = 75;  
-  delay(100);
-  dimming = 25;  
-  delay(100);
+  dimming = 128;
+  delay(500);
+  dimming = 75;
+  delay(500);
+  dimming = 25;
+  delay(500);
+  dimming = 0;
+  delay(500);
+  dimming = 25;
+  delay(500);
+  dimming = 75;
+  delay(500);
+  dimming = 128;
+  delay(500);
 }
