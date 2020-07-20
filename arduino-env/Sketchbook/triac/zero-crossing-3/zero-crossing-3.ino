@@ -43,7 +43,10 @@ void zero_crosss_int()
 
   // 10ms=10000us
   // (10000us - 10us) / 128 = 75 (Approx) For 60Hz =>65
-  int dimtime = (65*dimming);    // For 60Hz =>65     
+
+  // 75 and 10 for 50hz
+  // 65 and 8.33 for 60hz
+  int dimtime = (75*dimming);    // For 60Hz =>65     
   delayMicroseconds(dimtime);    // Off cycle
   digitalWrite(AC_LOAD, HIGH);   // triac firing
   delayMicroseconds(10);         // triac On propogation delay
@@ -54,6 +57,6 @@ void zero_crosss_int()
 void loop() {
   for (int i=5; i <= 128; i++) {
     dimming=i;
-    delay(10);
+    delay(100);
   }
 }

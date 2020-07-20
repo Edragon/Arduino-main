@@ -1,0 +1,22 @@
+#######################################
+# Syntax Coloring Map
+#######################################
+
+#######################################
+# Classes and datatypes (KEYWORD1)
+#######################################
+TriacDimmer	KEYWORD1
+detail	KEYWORD1
+
+#######################################
+# Methods and functions (KEYWORD2)
+#######################################
+begin	KEYWORD2
+end	KEYWORD2
+setBrightness	KEYWORD2
+getCurrentBrightness	KEYWORD2
+disable	KEYWORD2
+
+######################################
+# Constants/defines (LITERAL1)
+#######################################

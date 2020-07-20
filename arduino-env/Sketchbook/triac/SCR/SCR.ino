@@ -7,12 +7,16 @@ void setup() {
   PCICR |= (1 << PCIE0);    //启用PCMSK0扫描                                               
   PCMSK0 |= (1 << PCINT0);  //设置引脚D8触发中断状态改变,光耦输入.
   pinMode(3,OUTPUT);        //将D3定义为DIAC脉冲的输出
+  Serial.begin(9600);
+  
 
 }
 
 void loop() {
    valor = analogRead(A0);
    valor = map(analogRead(A0),0,1024,10000,2188);
+   Serial.println(valor);
+   
     if (detectado)
     {
       delayMicroseconds(valor); //此延迟控制电源
