@@ -1,5 +1,6 @@
 //source: https://arduinodiy.wordpress.com/2012/10/19/dimmer-arduino/
 
+// works ON for EDU PCB
 /*
 AC Voltage dimmer with Zero cross detection
 Author: Charith Fernanado http://www.inmojo.com
@@ -25,6 +26,8 @@ In the program pin 2 is chosen
 
 int AC_LOAD = 3;    // Output to Opto Triac pin
 int dimming = 128;  // Dimming level (0-128)  0 = ON, 128 = OFF
+
+
 /* Due to timing problems, the use of ‘0’ can sometimes make the circuit 
 flicker. It is safer to use a value slightly higher than ‘0’
 */

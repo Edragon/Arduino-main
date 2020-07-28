@@ -1,15 +1,15 @@
 //source: http://electronics.stackexchange.com/q/59615
 
 int AC_LOAD = 3;    // Output to Opto Triac pin
-int AC_LOAD2 = 4;    // Output to Opto Triac pin
-int dimming = 75;  // Dimming level (0-128)  0 = ON, 128 = OFF
+//int AC_LOAD2 = 4;    // Output to Opto Triac pin
+int dimming = 30;  // Dimming level (0-128)  0 = ON, 128 = OFF
 
 void setup()
 {
   pinMode(AC_LOAD, OUTPUT);       // Set the AC Load as output
-  attachInterrupt(digitalPinToInterrupt(2), zero_crosss_int, RISING);
+  //attachInterrupt(digitalPinToInterrupt(2), zero_crosss_int, RISING);
   //attachInterrupt(digitalPinToInterrupt(2), zero_crosss_int, CHANGE);
-  //attachInterrupt(0, zero_crosss_int, RISING);  // Choose the zero cross interrupt # from the table above
+  attachInterrupt(0, zero_crosss_int, RISING);  // Choose the zero cross interrupt # from the table above
 }
 
 void zero_crosss_int()  // function to be fired at the zero crossing to dim the light
@@ -29,18 +29,18 @@ void zero_crosss_int()  // function to be fired at the zero crossing to dim the 
 
 void loop()
 {
-//  dimming = 128;
-//  delay(1000);
+  dimming = 128;
+  delay(1000);
   dimming = 75;
   delay(1000);
   dimming = 25;
   delay(1000);
-//  dimming = 0;
-//  delay(1000);
-//  dimming = 25;
-//  delay(1000);
-//  dimming = 75;
-//  delay(1000);
-//  dimming = 128;
-//  delay(1000);
+  dimming = 0;
+  delay(1000);
+  dimming = 25;
+  delay(1000);
+  dimming = 75;
+  delay(1000);
+  dimming = 128;
+  delay(1000);
 }
