@@ -10,6 +10,7 @@ void setup() {
   Serial.println(F("No pulses yet...")); // Message to send initially (no pulses detected yet).
 }
 
+
 void loop() {
   if (digitalRead(input) > var)
   {

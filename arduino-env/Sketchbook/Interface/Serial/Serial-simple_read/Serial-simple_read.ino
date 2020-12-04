@@ -1,8 +1,14 @@
+#include <SoftwareSerial.h>
+
+SoftwareSerial mySerial(3, 4); // RX, TX
+
 char receivedChar;
 boolean newData = false;
 
 void setup() {
     Serial.begin(9600);
+    mySerial.begin(9600);
+    
     Serial.println("<Arduino is ready>");
 }
 
@@ -12,8 +18,8 @@ void loop() {
 }
 
 void recvOneChar() {
-    if (Serial.available() > 0) {
-        receivedChar = Serial.read();
+    if (mySerial.available() > 0) {
+        receivedChar = mySerial.read();
         newData = true;
     }
 }

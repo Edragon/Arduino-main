@@ -2,7 +2,7 @@ byte byteRead;
 
 void setup() {                
 // Turn the Serial Protocol ON
-  Serial.begin(9600);
+  Serial.begin(115200);
 }
 
 void loop() {
@@ -14,4 +14,3 @@ void loop() {
     Serial.write(byteRead);
   }
 }
-
