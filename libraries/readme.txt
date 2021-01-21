@@ -1,1 +1,1 @@
-瀹夎搴撶殑璇︾粏淇℃伅锛岃鍙傞槄锛歨ttp://www.arduino.cc/en/Guide/Libraries
+安装库的详细信息，请参阅：http://www.arduino.cc/en/Guide/Libraries
