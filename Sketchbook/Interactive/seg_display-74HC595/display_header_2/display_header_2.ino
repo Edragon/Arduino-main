@@ -1,8 +1,8 @@
 // Demonstration Arduino sketch for four digit, seven segment display with enclosure
 // http://tronixlabs.com/display/led/numeric/four-digit-seven-segment-display-module-and-enclosure/
 
-int latchPin = 12;   // connect to LCK pin
 int clockPin = 13;   // connect to CLK pin
+int latchPin = 12;   // connect to LCK or RCK pin
 int dataPin = 11;    // connect to SDI pin
 
 int LED_SEG_TAB[]={
@@ -117,5 +117,3 @@ void loop()
   digitalWrite(latchPin, HIGH);
   delay(1000);
 }
-
-
