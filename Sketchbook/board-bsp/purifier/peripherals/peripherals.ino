@@ -1,21 +1,20 @@
 
+#define tap_feedback 6 // default LOW
 
-#define GPRS_boot  12
+#define GPRS_boot  12 // HIGH -> ON
 
-#define relay      13
+#define relay      10 // HIGH -> ON
 
-#define led1       30
-#define led2       31
-#define led3       32
+#define led1       30 // HIGH -> ON
+#define led2       31 // HIGH -> ON
 
-#define buzzer     33
+#define buzzer     33 // HIGH -> OFF
 
 #define water_flow 7
 
 #define water_tds  A0 // traditional 
-
-#define water_temp A1
-#define flood      A2
+#define water_temp A1 // 
+#define flood      A2 // top-right 2P XH2.54
 
 // Serial  = uart0 = USB-TTL
 // Serial1 = uart1 = SIM800
@@ -24,54 +23,60 @@
 
 void setup() {
   Serial.begin(115200);
-  
+  Serial1.begin(115200);
+
+  pinMode(tap_feedback, INPUT);
 
   pinMode(led1, OUTPUT);
   pinMode(led2, OUTPUT);
-  pinMode(led3, OUTPUT);
+
   pinMode(buzzer, OUTPUT);
   pinMode(relay, OUTPUT);
-
-  pinMode(GPRS_boot, OUTPUT);
-  digitalWrite(GPRS_boot, LOW);
-
+  init_off();
+  init_on();
 }
 
 
 
 void loop() {
-  test();
-
+  AT_loop();
+  read_relay_status();
 }
 
 
-void test() {
-  Serial.println("begin..");
-  test_ON();
-  test_OFF();
-  test_ON();
-  test_OFF();
-  test_ON();
-  test_OFF();
-}
-
-
-void test_ON() {
-  digitalWrite(led1, HIGH);
-  digitalWrite(led2, HIGH);
-  digitalWrite(led3, HIGH);
-  digitalWrite(buzzer, HIGH);
-  digitalWrite(relay, HIGH);
-
-  delay(1000);
-}
-
-void test_OFF() {
+void init_off() {
+  pinMode(GPRS_boot, OUTPUT);
+  digitalWrite(GPRS_boot, LOW);
   digitalWrite(led1, LOW);
   digitalWrite(led2, LOW);
-  digitalWrite(led3, LOW);
-  digitalWrite(buzzer, LOW);
+  digitalWrite(buzzer, HIGH);
   digitalWrite(relay, LOW);
+}
 
-  delay(1000);
+void init_on() {
+  pinMode(GPRS_boot, OUTPUT);
+  digitalWrite(GPRS_boot, HIGH);
+  delay(5000);
+  digitalWrite(GPRS_boot, LOW);
+}
+
+
+void AT_loop() {
+  if (Serial1.available()) {
+    Serial.write(Serial1.read());
+  }
+  if (Serial.available()) {
+    Serial1.write(Serial.read());
+  }
+}
+
+void read_relay_status() {
+  int tap_staus = digitalRead(tap_feedback);
+
+  if (tap_staus == HIGH) {
+    digitalWrite (buzzer, LOW);
+  }
+  else {
+    digitalWrite(buzzer, HIGH);
+  }
 }
