@@ -38,12 +38,6 @@ void setup() {
 
 
 
-void loop() {
-  AT_loop();
-  read_relay_status();
-}
-
-
 void init_off() {
   pinMode(GPRS_boot, OUTPUT);
   digitalWrite(GPRS_boot, LOW);
@@ -68,15 +62,23 @@ void AT_loop() {
   if (Serial.available()) {
     Serial1.write(Serial.read());
   }
+  
 }
 
 void read_relay_status() {
   int tap_staus = digitalRead(tap_feedback);
 
   if (tap_staus == HIGH) {
-    digitalWrite (buzzer, LOW);
+    digitalWrite (led1, HIGH);
   }
   else {
-    digitalWrite(buzzer, HIGH);
+    digitalWrite(led1, LOW);
   }
+}
+
+void loop() {
+  AT_loop();
+  read_relay_status();
+  
+  //delay(2000);
 }
