@@ -23,23 +23,53 @@ void setup() {
   mySerial.begin(BAUD_RATE);
 }
 
+
+
 void loop() {
+  del();
+  if (check() == true) {
+    //Serial.print ("checked");
+    rd2();
+  }
+}
+
+void del() {
   for (int i = 1; i < 23; i++) {
     hlw[i] = 0;
-  }
-
-  for (mySerial.read() == 0xfa) {
-    rd();
   }
 }
 
 
+bool check() {
+  while (1) {
+    if (mySerial.available() > 0) {
+      int rd = mySerial.read();
+
+      if ( rd == 0xfa) {
+        return true;
+        break;
+      }
+    }
+  }
+}
 
 void rd() {
-
   for (int i = 0; i < 23; i++) {
     if (mySerial.available() > 0) {
       hlw[i] = mySerial.read();
+      Serial.write(hlw[i]);
     }
   }
+}
+
+void rd2() {
+  //Serial.flush();
+  
+  //if (mySerial.available() > 0) {
+    Serial.write(mySerial.read());
+    Serial.write(mySerial.read());
+    Serial.write(mySerial.read());
+  //}
+
+  
 }
