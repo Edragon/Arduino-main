@@ -1,10 +1,15 @@
 int dirpin = 2;
-int steppin = 3;
+int enpin = 8;
+int steppin = 5;
 
-void setup() 
+void setup()
 {
-pinMode(dirpin, OUTPUT);
-pinMode(steppin, OUTPUT);
+  pinMode(dirpin, OUTPUT);
+  pinMode(steppin, OUTPUT);
+
+  pinMode(enpin, OUTPUT);
+  digitalWrite(enpin, LOW);
+
 }
 void loop()
 {
@@ -15,7 +20,7 @@ void loop()
   delay(100);
 
 
-  for (i = 0; i<4000; i++)       // Iterate for 4000 microsteps.
+  for (i = 0; i < 4000; i++)     // Iterate for 4000 microsteps.
   {
     digitalWrite(steppin, LOW);  // This LOW to HIGH change is what creates the
     digitalWrite(steppin, HIGH); // "Rising Edge" so the easydriver knows to when to step.
@@ -26,7 +31,7 @@ void loop()
   delay(100);
 
 
-  for (i = 0; i<4000; i++)       // Iterate for 4000 microsteps
+  for (i = 0; i < 4000; i++)     // Iterate for 4000 microsteps
   {
     digitalWrite(steppin, LOW);  // This LOW to HIGH change is what creates the
     digitalWrite(steppin, HIGH); // "Rising Edge" so the easydriver knows to when to step.

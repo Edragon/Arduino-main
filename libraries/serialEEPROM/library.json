@@ -1,0 +1,19 @@
+{
+    "name": "serialEEPROM",
+    "keywords": "EEPROM, 24C128, 24C256, 24C01C",
+    "description": "Arduino Library for I2C EEPROM",
+    "authors": [
+        {
+            "name": "Hugo Arganda",
+            "email": "hugo.arganda@gmail.com",
+            "maintainer": true
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://https://github.com/argandas/serialEEPROM.git"
+    },
+    "version": "2.0.1",
+    "frameworks": "arduino",
+    "platforms": "*"
+}
