@@ -1,23 +1,25 @@
+#include <SoftwareSerial.h>
+
+SoftwareSerial mySerial(4, 5); // RX, TX
+
 int i = 0;
-char received[13];
+char received[3];
 
-
-// connect EL125 ground to arduino ground
-// connect EL125 TX pin to arduino D0 pin
-//
 
 void setup()
 {
   Serial.begin(9600);
+  mySerial.begin(9600);
   Serial.println("Start, serial read and print in HEX");
+  
 }
 
 void loop()
 {
 
-  if (Serial.available() > 0)
+  if (mySerial.available() > 0)
   {
-    received[i] = Serial.read();
+    received[i] = mySerial.read();
     Serial.print(received[i], HEX);
     //Serial.print(received[i], DEC);
 
@@ -26,7 +28,7 @@ void loop()
   }
   //received[i] = '\0';
 
-  if (i >= 13) {
+  if (i >= 1) {
     Serial.println("");
     
     Serial.print("card number hex is:");

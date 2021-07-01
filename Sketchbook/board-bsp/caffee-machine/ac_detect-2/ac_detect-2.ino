@@ -31,31 +31,23 @@ void setup() {
 }
 
 void loop() {
-
-  // serial 
-  if (mySerial.available()) {
-    Serial.write(mySerial.read());
-  }
-  if (Serial.available()) {
-    mySerial.write(Serial.read());
-  }
-
-  // ac detect input
-  if (digitalRead(ac_detect) == LOW || digitalRead(ac_detect2) == LOW ) {
-  //if (digitalRead(ac_detect) == LOW ) {
-    digitalWrite (relay, HIGH);
+  if (digitalRead(ac_detect) == LOW) {
+    Serial.print("0  ");
+    //digitalWrite(relay, HIGH);
   }
   else {
-    digitalWrite (relay, LOW);
+    Serial.print("1  ");
+    //digitalWrite(relay, LOW);
   }
-
   
-  //socket input
-  if (digitalRead(sense_input) == HIGH) {
-    digitalWrite (relay, HIGH);
+  if (digitalRead(ac_detect2) == LOW) {
+    Serial.println("0  ");
+    //digitalWrite(relay, HIGH);
   }
   else {
-    digitalWrite (relay, LOW);
+    Serial.println("1  ");
+    //digitalWrite(relay, LOW);
   }
+  delay(100);
 
 }
