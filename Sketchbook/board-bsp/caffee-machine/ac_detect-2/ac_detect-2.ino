@@ -11,20 +11,20 @@ SoftwareSerial mySerial(4, 5); // RX, TX
 
 void setup() {
   pinMode(relay, OUTPUT);
-
   pinMode(GSM_BOOT, OUTPUT);
 
   pinMode(ac_detect, INPUT);
   pinMode(ac_detect2, INPUT);
-  digitalWrite(ac_detect, HIGH);
-  digitalWrite(ac_detect2, HIGH);
-  
   pinMode(sense_input, INPUT);
-  
-  digitalWrite(GSM_BOOT, HIGH);
+
+
 
   Serial.begin(9600);
   mySerial.begin(9600);
+
+  digitalWrite(ac_detect, HIGH);
+  digitalWrite(ac_detect2, HIGH);
+  digitalWrite(GSM_BOOT, HIGH);
 
   Serial.println ("ready.");
 
@@ -39,7 +39,7 @@ void loop() {
     Serial.print("1  ");
     //digitalWrite(relay, LOW);
   }
-  
+
   if (digitalRead(ac_detect2) == LOW) {
     Serial.println("0  ");
     //digitalWrite(relay, HIGH);
