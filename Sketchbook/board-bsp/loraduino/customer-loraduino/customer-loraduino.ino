@@ -15,6 +15,8 @@
 // Singleton instance of the radio driver
 
 // for loraduino
+
+// CS and INT
 RH_RF95 driver(10, 2);
 //RH_RF95 driver(5, 2); // Rocket Scream Mini Ultra Pro with the RFM95W
 
@@ -47,7 +49,7 @@ void setup()
   pinMode(7, OUTPUT);
   digitalWrite(7, HIGH);
 
-  Serial.begin(9600);
+  Serial.begin(115200);
   while (!Serial) ; // Wait for serial port to be available
   if (!manager.init())
     Serial.println("init failed");
