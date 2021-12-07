@@ -1,6 +1,3 @@
-
-
-
 // acurator tap and relay
 
 #define tap_feedback 6 // default LOW
@@ -32,7 +29,8 @@
 void setup() {
   Serial.begin(115200);
   Serial1.begin(115200);
-  Serial2.begin(115200);
+  Serial2.begin(9600);  // TDS sensor
+  Serial3.begin(115200);  // TDS sensor
   
   pinMode(tap_feedback, INPUT);
   pinMode(led30, OUTPUT);
@@ -69,12 +67,24 @@ void init_on() {
 
 
 void loop() {
-  AT_loop();
+  AT_loop3();
+
+  //AT_loop();
   //read_relay_status();
 
   //delay(2000);
 }
 
+
+
+void AT_loop3() {
+  if (Serial3.available()) {
+    Serial.write(Serial3.read());
+  }
+  if (Serial.available()) {
+    Serial3.write(Serial.read());
+  }
+}
 
 void AT_loop() {
   if (Serial1.available()) {
