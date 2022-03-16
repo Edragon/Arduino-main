@@ -1,10 +1,6 @@
-//#include <SoftwareSerial.h>
-//SoftwareSerial mySerial(2, 3); // RX, TX
-
 void setup() {
-  //mySerial.begin(9600);
   Serial.begin(9600);
-  pinMode(8, OUTPUT);//DE/RE Controling pin of RS-485
+  pinMode(3, OUTPUT);//DE/RE Controling pin of RS-485
   digitalWrite(8,HIGH);//DE/RE=HIGH Transmit Enabled M1
 }
 

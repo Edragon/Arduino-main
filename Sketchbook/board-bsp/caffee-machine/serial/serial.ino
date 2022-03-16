@@ -1,20 +1,18 @@
-#include <SoftwareSerial.h>
+#include <SoftwareSerial.h>.
+
+#define GSM_BOOT  8
+#define relay 6
+
 
 SoftwareSerial mySerial(4, 5); // RX, TX
-#define GPRS_boot  8
+
 
 void setup() {
-  Serial.begin(19200);
-  mySerial.begin(19200);
+  Serial.begin(9600);
+  mySerial.begin(9600);
 
-  // boot
-  pinMode(GPRS_boot, OUTPUT);
-  digitalWrite(GPRS_boot, LOW);
-  delay(3000);
-  digitalWrite(GPRS_boot, HIGH);
-  delay(3000);
-  digitalWrite(GPRS_boot, LOW);
-
+  pinMode(GSM_BOOT, OUTPUT);
+  digitalWrite(GSM_BOOT, HIGH);
 }
 
 
@@ -22,8 +20,8 @@ void loop() {
   if (mySerial.available()) {
     Serial.write(mySerial.read());
   }
+
   if (Serial.available()) {
     mySerial.write(Serial.read());
   }
-
 }
