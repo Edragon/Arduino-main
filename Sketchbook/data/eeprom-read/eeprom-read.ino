@@ -22,7 +22,7 @@ uEEPROMLib eeprom(0x50);
 
 char k[10] = "";
 
-char b = 0;
+int b = 0;
 
 void setup() {
   delay (500);
@@ -44,6 +44,6 @@ void loop() {
     b = eeprom.eeprom_read(a);
     Serial.print("address: "); Serial.print(a);
     Serial.print(" - data: "); Serial.print(b);
-    Serial.println(" - OK");
+    Serial.println(" - ROK");
   }
 }
