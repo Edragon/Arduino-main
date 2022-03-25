@@ -1,0 +1,48 @@
+#######################################
+# Syntax Coloring Map For DFRobot_DS1307
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+DFRobot_DS1307	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	 KEYWORD2
+getTime	 KEYWORD2
+getTypeTime	KEYWORD2
+setTime	KEYWORD2
+setTypeTime	KEYWORD2
+start	KEYWORD2
+stop	KEYWORD2
+
+setSqwPinMode	KEYWORD2
+getSqwPinMode	KEYWORD2
+
+saveTimeToEEPROM	KEYWORD2
+setTimeFromEEPROM	KEYWORD2
+readEEPROM	KEYWORD2
+writeEEPROM	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+eSEC	LITERAL1
+eMIN	LITERAL1
+eHR	LITERAL1
+eDOW	LITERAL1
+eDATE	LITERAL1
+eMTH	LITERAL1
+eYR	LITERAL1
+
+eSquareWave_LOW 	LITERAL1
+eSquareWave_HIGH	LITERAL1
+eSquareWave_1Hz	LITERAL1
+eSquareWave_4kHz	LITERAL1
+eSquareWave_8kHz	LITERAL1
+eSquareWave_32kHz	LITERAL1
