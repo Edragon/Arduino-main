@@ -46,11 +46,12 @@ void setup() {
 
 void loop() {
 
-  delay(5);
+  //delay(5);
 
   // loop address
   for (int a = 0; a < 32768; a++)
   {
+    k++;
     //int k = random(0, 3);
     //char k = random(65, 68);  // A B C
 
@@ -58,7 +59,7 @@ void loop() {
     if ( !eeprom.eeprom_write(a, k) ) {
       Serial.println("NOK");
     } else {
-      k++;
+      
       Serial.print("address: "); Serial.print(a);
 
       Serial.print(" - data: "); Serial.print(k);
@@ -66,7 +67,7 @@ void loop() {
       Serial.println(" - OK");
     }
 
-    if (k > 100)
+    if (k > 256)
     {
       k = 0;
     }
