@@ -2,7 +2,7 @@
 void setup() {
   Serial.begin(9600);
   Serial2.begin(9600);
-  delay(1000);
+  delay(500);
 
   
   Serial.println("Setup Complete!");
