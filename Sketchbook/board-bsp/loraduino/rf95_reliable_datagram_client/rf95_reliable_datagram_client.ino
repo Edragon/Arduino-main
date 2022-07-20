@@ -50,6 +50,7 @@ void setup()
     
   driver.setFrequency(434.0);
 
+  // initialize Flash
   if (flash.initialize())
   {
     Serial.println("Init OK!");
@@ -59,6 +60,7 @@ void setup()
   
   delay(1000);
 }
+
 
 uint8_t data[] = "Hello World!";
 // Dont put this on the stack:
