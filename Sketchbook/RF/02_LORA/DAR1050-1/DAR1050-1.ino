@@ -12,9 +12,9 @@
 // 0xEF30 for windbond 4mbit flash
 // 0xEF40 for windbond 64mbit flash
 
-SPIFlash flash(8, 0xEF40);
+SPIFlash flash(10, 0xEF40);
 
-RH_RF95 driver(10, 2);
+RH_RF95 driver(8, 2);
 
 RHReliableDatagram manager(driver, CLIENT_ADDRESS);
 
@@ -42,7 +42,7 @@ void setup()
   pinMode(7, OUTPUT);
   digitalWrite(7, HIGH);
 
-  Serial.begin(9600);
+  Serial.begin(115200);
   
   while (!Serial) ; // Wait for serial port to be available
   if (!manager.init())
