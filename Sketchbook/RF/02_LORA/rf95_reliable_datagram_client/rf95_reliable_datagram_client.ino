@@ -46,16 +46,16 @@ void setup()
   
   while (!Serial) ; // Wait for serial port to be available
   if (!manager.init())
-    Serial.println("init failed");
+    Serial.println("RF Init failed");
     
   driver.setFrequency(434.0);
 
-  if (flash.initialize())
-  {
-    Serial.println("Init OK!");
-  }
-  else
-    Serial.println("Init FAIL!");
+//  if (flash.initialize())
+//  {
+//    Serial.println("Flash Init OK!");
+//  }
+//  else
+//   Serial.println("Flash Init FAIL!");
   
   delay(1000);
 }
