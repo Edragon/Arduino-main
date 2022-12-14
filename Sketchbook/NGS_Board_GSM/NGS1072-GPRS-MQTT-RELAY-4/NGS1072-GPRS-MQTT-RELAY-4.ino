@@ -7,7 +7,7 @@
 // #define SerialMon Serial // this DBG is not working ..
 //#define TINY_GSM_DEBUG SerialMon
 
-SoftwareSerial SerialAT(4, 5); // RX, TX
+SoftwareSerial SerialAT(9, 10); // RX, TX
 TinyGsm modem(SerialAT);
 TinyGsmClient client(modem);
 PubSubClient mqtt(client);
