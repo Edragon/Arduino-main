@@ -1,46 +1,63 @@
-// Simple I2C test for ebay 128x64 oled.
+
+#define relay 1
+#define led 0
+
+#define current_sensor 9
+#define voltage_sensor 10
+#define buttons 8
+
 
 #include <Wire.h>
 #include "SSD1306Ascii.h"
 #include "SSD1306AsciiWire.h"
 
-// 0X3C+SA0 - 0x3C or 0x3D
-#define I2C_ADDRESS 0x3C
-
-// Define proper RST_PIN if required.
-#define RST_PIN -1
-
 SSD1306AsciiWire oled;
-//------------------------------------------------------------------------------
+
+//int flag = 1;
+
 void setup() {
   Wire.begin();
   Wire.setClock(400000L);
 
-#if RST_PIN >= 0
-  oled.begin(&Adafruit128x64, I2C_ADDRESS, RST_PIN);
-#else // RST_PIN >= 0
-  oled.begin(&Adafruit128x64, I2C_ADDRESS);
-#endif // RST_PIN >= 0
+  oled.begin(&Adafruit128x64, 0x3C);
 
   oled.setFont(Adafruit5x7);
 
-  uint32_t m = micros();
-  oled.clear();
-  oled.println("Hello world!");
-  oled.println("A long line may be truncated");
-  oled.println();
-  oled.set2X();
-  oled.println("2X demo");
-  oled.set1X();
-  oled.print("\nmicros: ");
-  oled.print(micros() - m);
+  //pinMode(relay, OUTPUT);
+  //pinMode(led, OUTPUT);
 }
-//------------------------------------------------------------------------------
+
 void loop() {
-  
+
+  int cs = analogRead(current_sensor);
+  int vs = analogRead(voltage_sensor);
+  int bt = analogRead(buttons);
+
   oled.clear();
-  delay(1000); 
-  oled.println("Hello world!");
-  delay(1000); 
-  
-  }
+  oled.set2X();
+  oled.println("SVC1039!");
+  oled.println("--------------");
+
+  oled.set1X();
+
+  oled.print("current: ");
+  oled.println(cs - 512);
+
+  oled.print("voltage: ");
+  oled.println(vs);
+
+  oled.print("buttons: ");
+  oled.println(bt);
+
+//  if (flag = 1) {
+//    flag = 0;
+//    digitalWrite(relay, HIGH);
+//    digitalWrite(led, HIGH);
+//  } else {
+//    flag = 1;
+//    digitalWrite(relay, LOW);
+//    digitalWrite(led, LOW);
+//  }
+  delay(1000);
+
+}
