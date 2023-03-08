@@ -7,7 +7,7 @@
 #define BLINK_FAST_DELAY 50
 #define BLINK_SLOW_DELAY 1000
 
-SPIFlash flash(SS_FLASHMEM, 0xEF30); //EF40 for 16mbit windbond chip
+SPIFlash flash(8, 0xEF40); //EF40 for 16mbit windbond chip
 int LEDTIME = 500;
 
 // the setup routine runs once when you press reset:

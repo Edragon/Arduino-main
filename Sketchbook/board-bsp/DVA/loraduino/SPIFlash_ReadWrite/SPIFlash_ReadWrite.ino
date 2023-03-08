@@ -37,10 +37,10 @@
 // **********************************************************************************
 
 
-#include <SPIFlash_lp.h>    //get it here: https://github.com/LowPowerLab/SPIFlash
+#include <SPIFlash.h>    //get it here: https://github.com/LowPowerLab/SPIFlash
 #include <SPI.h>
 
-#define SERIAL_BAUD      115200
+#define SERIAL_BAUD      9600
 char input = 0;
 long lastPeriod = -1;
 
@@ -48,7 +48,7 @@ long lastPeriod = -1;
   #define LED           15 // Moteino MEGAs have LEDs on D15
   #define FLASH_SS      23 // and FLASH SS on D23
 #else
-  #define LED           9 // Moteinos have LEDs on D9
+  #define LED           7 // Moteinos have LEDs on D9
   #define FLASH_SS      8 // and FLASH SS on D8
 #endif
 
@@ -58,7 +58,7 @@ long lastPeriod = -1;
 // MANUFACTURER_ID - OPTIONAL, 0x1F44 for adesto(ex atmel) 4mbit flash
 //                             0xEF30 for windbond 4mbit flash
 //////////////////////////////////////////
-SPIFlash flash(FLASH_SS, 0xEF30);
+SPIFlash flash(FLASH_SS, 0xEF40);
 
 void setup(){
   Serial.begin(SERIAL_BAUD);
