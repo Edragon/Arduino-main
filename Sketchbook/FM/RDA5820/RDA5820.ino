@@ -4,27 +4,34 @@
 void setup() {
   Serial.begin(9600);
   initRda5820();//初始化FM模块主要上电复位和设置一些其他功能
-  RX_Fm(10710);//FM接收模式
+  //RX_Fm(10710);//FM接收模式
   // TX_Fm();//FM发送模式
 }
-void loop() {
-//  RX_Fm(10710);// 中国国际广播
-//  Serial.print("FMtx=");
-//  Serial.print(Rda5820FreqGet());//FM频率
-//  Serial.println(" ");
-//  delay(10000);
-//  
-//  RX_Fm(9910);// 龙华电视台
-//  Serial.print("FMtx=");
-//  Serial.print(Rda5820FreqGet());//FM频率
-//  Serial.println(" ");
-//  delay(10000);
 
-  RX_Fm(10430);// 宝安电视台
+void loop() {
+    RX_Fm(10710);// 中国国际广播
+    Serial.print("FMtx=");
+    Serial.print(Rda5820FreqGet());//FM频率
+    Serial.println(" ");
+    delay(50000);
+
+
+  //  RX_Fm(9910);// 龙华电视台
+  //  Serial.print("FMtx=");
+  //  Serial.print(Rda5820FreqGet());//FM频率
+  //  Serial.println(" ");
+  //  delay(5000);
+
+  RX_Fm(8980);// 宝安电视台 // 898
   Serial.print("FMtx=");
   Serial.print(Rda5820FreqGet());//FM频率
   Serial.println(" ");
-  delay(100000);
+
+  //  RX_Fm(10620);// 宝安电视台 // 10430
+  //  Serial.print("FMtx=");
+  //  Serial.print(Rda5820FreqGet());//FM频率
+  //  Serial.println(" ");
+  //  delay(50000);
 }
 
 void initRda5820()//FM初始化
