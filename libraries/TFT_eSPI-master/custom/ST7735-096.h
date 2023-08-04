@@ -1,9 +1,8 @@
 
 #define ST7735_DRIVER      // Define additional parameters below for this display
 
-#define TFT_WIDTH  80
-
-#define TFT_HEIGHT 160
+#define TFT_WIDTH  160  
+#define TFT_HEIGHT 80
 
 // #define ST7735_INITB           // not working
 // #define ST7735_GREENTAB        // not working
@@ -12,7 +11,7 @@
 // #define ST7735_GREENTAB128     // not working  
 // #define ST7735_GREENTAB160x80  // OK2  
 // #define ST7735_REDTAB          // not working
-// #define ST7735_BLACKTAB        // not working
+//#define ST7735_BLACKTAB        // not working
 // #define ST7735_REDTAB160x80    // OK1  
 
 #define TFT_MOSI 19
@@ -130,9 +129,9 @@
 
 // #define SPI_FREQUENCY   1000000
 // #define SPI_FREQUENCY   5000000
-// #define SPI_FREQUENCY  10000000
+#define SPI_FREQUENCY  10000000
 // #define SPI_FREQUENCY  20000000
-#define SPI_FREQUENCY  27000000
+// #define SPI_FREQUENCY  27000000
 // #define SPI_FREQUENCY  40000000
 // #define SPI_FREQUENCY  55000000 // STM32 SPI1 only (SPI2 maximum is 27MHz)
 // #define SPI_FREQUENCY  80000000

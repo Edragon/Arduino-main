@@ -14,20 +14,20 @@
 
 // Customised User_Setup files are stored in the "User_Setups" folder.
 
-#ifndef USER_SETUP_LOADED //  Lets PlatformIO users define settings in
+###ifndef USER_SETUP_LOADED //  Lets PlatformIO users define settings in
                           //  platformio.ini, see notes in "Tools" folder.
 
 // Only ONE line below should be uncommented.  Add extra lines and files as needed.
 
 //#include <User_Setup-3.h>           // Default setup is root library folder
 
-//#include <custom/ST7735-096.h>
+#include <custom/ST7735-096.h>
 
 //#include <custom/ST7789-1.14.h>
 
 //#include <custom/ST7789-2.0.h>
 
-#include <custom/ILI9341-3.2.h>
+//#include <custom/ILI9341-3.2.h>
 
 //#include <User_Setups/Setup1_ILI9341.h>  // Setup file configured for my ILI9341
 //#include <User_Setups/Setup2_ST7735.h>   // Setup file configured for my ST7735
