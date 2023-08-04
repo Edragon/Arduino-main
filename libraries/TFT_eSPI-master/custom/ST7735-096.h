@@ -9,10 +9,13 @@
 // #define ST7735_GREENTAB2       // not working
 // #define ST7735_GREENTAB3       // not working 
 // #define ST7735_GREENTAB128     // not working  
-// #define ST7735_GREENTAB160x80  // OK2  
+#define ST7735_GREENTAB160x80  // OK2  
 // #define ST7735_REDTAB          // not working
 //#define ST7735_BLACKTAB        // not working
 // #define ST7735_REDTAB160x80    // OK1  
+
+// #define CGRAM_OFFSET      // Library will add offsets required
+
 
 #define TFT_MOSI 19
 #define TFT_SCLK 18
